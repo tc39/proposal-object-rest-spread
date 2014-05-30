@@ -54,6 +54,10 @@ __Shallow Clone__
 ```javascript
 let aCopy = { ...a };
 ```
+_Desugars into:_
+```javascript
+let ab = Object.assign({}, a, b);
+```
 
 __Merging Two Objects__
 ```javascript
