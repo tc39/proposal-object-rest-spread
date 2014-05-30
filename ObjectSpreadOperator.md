@@ -52,11 +52,11 @@ NOTE: This follows the same semantics as Object.assign(`object`, _AssignmentExpr
 
 __Shallow Clone__
 ```javascript
-let aCopy = { ...a };
+let aClone = { ...a };
 ```
 _Desugars into:_
 ```javascript
-let ab = Object.assign({}, a, b);
+let aClone = Object.assign({}, a);
 ```
 
 __Merging Two Objects__
