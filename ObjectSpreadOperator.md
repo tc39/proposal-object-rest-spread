@@ -133,6 +133,15 @@ __Runtime Error__
 let nonObject = { ...null }; // throws TypeError exception
 ```
 
+__Updating Deep Immutable Object__
+```javascript
+let newVersion = {
+  ...previousVersion,
+  name: 'New Name', // Override the name property
+  items: [...parent.items, { title: 'New Item' }] // Add an item to the list of items
+};
+```
+Note: This pattern could get additional sugar in the future by making the `parent.items` identifier optional.
 
 ### Destructuring Parallel ###
 
