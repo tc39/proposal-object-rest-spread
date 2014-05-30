@@ -138,10 +138,11 @@ __Updating Deep Immutable Object__
 let newVersion = {
   ...previousVersion,
   name: 'New Name', // Override the name property
-  items: [...parent.items, { title: 'New Item' }] // Add an item to the list of items
+  address: { ...previousVersion.address, zipCode: '99999' } // Update the zip code of a nested object
+  items: [...previousVersion.items, { title: 'New Item' }] // Add an item to the list of items
 };
 ```
-Note: This pattern could get additional sugar in the future by making the `parent.items` identifier optional.
+Note: This pattern could get additional sugar in the future by making the `previousVersion.address` and `previousVersion.items` expressions optional.
 
 ### Destructuring Parallel ###
 
