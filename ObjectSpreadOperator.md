@@ -15,6 +15,8 @@ With parameter `object`.
 
 _PropertyDefinition : `...` AssignmentExpression_
 
+NOTE: This follows the same semantics as Object.assign(`object`, _AssignmentExpression_).
+
 1. Let `exprValue` be the result of evaluating _AssignmentExpression_.
 2. Let `propValue` be GetValue(`exprValue`).
 3. ReturnIfAbrupt(propValue).
