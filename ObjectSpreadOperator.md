@@ -50,6 +50,11 @@ NOTE: This follows the same semantics as Object.assign(`object`, _AssignmentExpr
 
 ### Examples ###
 
+__Shallow Clone__
+```javascript
+let aCopy = { ...a };
+```
+
 __Merging Two Objects__
 ```javascript
 let ab = { ...a, ...b };
