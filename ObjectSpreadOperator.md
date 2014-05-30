@@ -138,7 +138,7 @@ __Updating Deep Immutable Object__
 let newVersion = {
   ...previousVersion,
   name: 'New Name', // Override the name property
-  address: { ...previousVersion.address, zipCode: '99999' } // Update the zip code of a nested object
+  address: { ...previousVersion.address, zipCode: '99999' } // Update nested zip code
   items: [...previousVersion.items, { title: 'New Item' }] // Add an item to the list of items
 };
 ```
