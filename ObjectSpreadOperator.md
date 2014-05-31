@@ -142,7 +142,37 @@ let newVersion = {
   items: [...previousVersion.items, { title: 'New Item' }] // Add an item to the list of items
 };
 ```
-Note: This pattern could get additional sugar in the future by making the `previousVersion.address` and `previousVersion.items` expressions optional.
+
+### Possible Future Additions ###
+
+In the future we can add sugar for referring to the previous value in preceding spreads.
+
+__Implicit Identifier in Deep Updates__
+```javascript
+let newVersion = {
+  ...previousVersion,
+  name: 'New Name', // Override the name property
+  address: { ... , zipCode: '99999' } // Update nested zip code
+  items: [... , { title: 'New Item' }] // Add an item to the list of items
+};
+```
+
+__Excluding a Property Name__
+```javascript
+let userWithoutAddress = {
+  ...user,
+  delete address
+};
+```
+
+__Increment/Decrement a Property__
+```javascript
+let agingUser = {
+  ...user,
+  age++,
+  height-=5
+};
+```
 
 ### Destructuring Parallel ###
 
@@ -157,4 +187,3 @@ z; // { a: 3, b: 4 }
 let n = { x, y, ...z };
 n; // { x: 1, y: 2, a: 3, b: 4 }
 ```
-
