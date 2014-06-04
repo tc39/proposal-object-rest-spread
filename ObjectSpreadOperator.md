@@ -1,5 +1,5 @@
-Object Spread
--------------
+Object Spread Initializer
+-------------------------
 
 ### Examples ###
 
