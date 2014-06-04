@@ -189,6 +189,10 @@ let userWithoutAddress = {
   delete address
 };
 ```
+_Equivalent to:_
+```javascript
+let { address, ...userWithoutAddress } = user;
+```
 
 __Increment/Decrement a Property__
 ```javascript
