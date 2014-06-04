@@ -132,7 +132,7 @@ NOTE: This follows the same semantics as Object.assign(`object`, _AssignmentExpr
 13. Repeat while `nextIndex` < `len`,
   1. Let `nextKey` be Get(`keysArray`, ToString(`nextIndex`)).
   2. ReturnIfAbrupt(`nextKey`).
-  3. Let desc be the result of calling the [[GetOwnProperty]] internal method of from with argument `nextKey`.
+  3. Let `desc` be the result of calling the [[GetOwnProperty]] internal method of `from` with argument `nextKey`.
   4. If `desc` is an abrupt completion, then
     1. If `pendingException` is __undefined__, then set `pendingException` to `desc`.
   5. Else if `desc` is not __undefined__ and `desc`.[[Enumerable]] is __true__, then
