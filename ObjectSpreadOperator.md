@@ -118,11 +118,11 @@ _PropertyDefinition : `...` AssignmentExpression_
 NOTE: This follows the same semantics as Object.assign(`object`, _AssignmentExpression_).
 
 1. Let `exprValue` be the result of evaluating _AssignmentExpression_.
-2. Let `propValue` be GetValue(`exprValue`).
-3. ReturnIfAbrupt(propValue).
-4. Let `from` be ToObject(`propValue`).
+2. Let `fromValue` be GetValue(`exprValue`).
+3. ReturnIfAbrupt(`fromValue`).
+4. Let `from` be ToObject(`fromValue`).
 5. ReturnIfAbrupt(`from`).
-6. Let `keysArray` be the result of calling the [[OwnPropertyKeys]] internal method of `propValue`.
+6. Let `keysArray` be the result of calling the [[OwnPropertyKeys]] internal method of `fromValue`.
 7. ReturnIfAbrupt(`keysArray`).
 8. Let `lenValue` be Get(`keysArray`, __"length"__).
 9. Let `len` be ToLength(`lenValue`).
