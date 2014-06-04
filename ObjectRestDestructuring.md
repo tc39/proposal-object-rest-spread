@@ -11,25 +11,26 @@ y; // 2
 z; // { a: 3, b: 4 }
 ```
 
-__Extending a Base Function with Additional Properties__
+__Extending a Function with Additional Options__
 ```javascript
 function baseFunction({ a, b }) {
   // ...
 }
 function higherFunction({ x, y, ...restConfig }) {
   // do something with x and y
+  // pass the rest to the base function
   return baseFunction(restConfig);
 }
 ```
 
-Extra properties may be added to `baseFunction`. The `higherFunction` won't accidentally pass the `x` property along since it's stripped out.
+Extra properties may be safely added to `baseFunction`.
 
 ```javascript
 function baseFunction({ a, b, x }) {
   // ...
 }
 function higherFunction({ x, y, ...restConfig }) {
-  // do something with x and y, then pass the rest to the base function
+  // x won't be accidentally passed to baseFunction after this refactor
   return baseFunction(restConfig);
 }
 ```
@@ -41,7 +42,7 @@ function baseFunction({ a, b, x }) {
   // ...
 }
 function higherFunction({ x, y, ...restConfig }) {
-  // do something with x and y
+  // explicitly pass x along
   return baseFunction({ ...restConfig, x });
 }
 ```
