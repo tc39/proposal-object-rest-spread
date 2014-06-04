@@ -112,6 +112,7 @@ The runtime semantics of `...` _DestructuringAssignmentTarget_ in an object dest
 
 ### Prior Art ###
 
+__Successor-ML__
 ```ml
   val { x = x, y = y, ... = z } = obj
 ```
