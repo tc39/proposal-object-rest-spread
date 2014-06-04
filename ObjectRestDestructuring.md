@@ -25,7 +25,7 @@ let complex = {
 
 let {
   x: { a: xa, ...xbc },
-  y: [y0, ...y12] }
+  y: [y0, ...y12]
 } = complex;
 
 xa; // 1
