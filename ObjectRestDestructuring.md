@@ -3,12 +3,30 @@ Object Rest Destructuring
 
 ### Examples ###
 
-__Single Level__
+__Rest Properties__
 ```javascript
 let { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 };
 x; // 1
 y; // 2
 z; // { a: 3, b: 4 }
+```
+
+__Nested Objects__
+```javascript
+let complex = {
+  x: { a: 1, b: 2, c: 3 },
+  y: [4, 5, 6]
+};
+
+let {
+  x: { a: xa, ...xbc },
+  y: [y0, ...y12] }
+} = complex;
+
+xa; // 1
+xbc; // { b: 2, c: 3 }
+y1; // 4
+y12; // [5, 6]
 ```
 
 __Extending a Function with Additional Options__
@@ -65,6 +83,9 @@ let { ...x, y, z } = obj; // syntax error
 ```
 ```javascript
 let { x, ...y, ...z } = obj; // syntax error
+```
+```javascript
+let { x: { ...z }, y: { ...z } } = obj; // static error
 ```
 
 ### Syntax ###
