@@ -132,5 +132,7 @@ val { x = x, y = y, ... = z } = obj
 http://successor-ml.org/index.php?title=Functional_record_extension_and_row_capture
 
 Mentioned on the destructuring assignment wiki in previous discussions:
+
 http://wiki.ecmascript.org/doku.php?id=discussion:destructuring_assignment#successor-ml_and_row_capture
+
 http://wiki.ecmascript.org/doku.php?id=harmony:destructuring#issues
