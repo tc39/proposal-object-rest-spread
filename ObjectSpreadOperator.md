@@ -143,6 +143,26 @@ let newVersion = {
 };
 ```
 
+### Prior Art ###
+
+__Elm__
+```elm
+{ a | x <- 1, y <- 2 }
+```
+http://elm-lang.org/learn/Records.elm#updating-records
+
+__OCaml__
+```ocaml
+{ a with x = 1; y = 2 }
+```
+https://realworldocaml.org/v1/en/html/records.html#functional-updates
+
+__Haskell__
+```haskell
+a { x = 1, y = 2 }
+```
+http://www.haskell.org/haskellwiki/Default_values_in_records
+
 ### Possible Future Additions ###
 
 In the future we can add sugar for referring to the previous value in preceding spreads.
