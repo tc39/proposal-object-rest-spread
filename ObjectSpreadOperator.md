@@ -149,6 +149,12 @@ NOTE: This follows the same semantics as Object.assign(`object`, _AssignmentExpr
 
 ### Prior Art ###
 
+__Successor-ML__
+```ml
+{ ... = a, x = 1, y = 2 }
+```
+http://successor-ml.org/index.php?title=Functional_record_extension_and_row_capture
+
 __Elm__
 ```elm
 { a | x <- 1, y <- 2 }
