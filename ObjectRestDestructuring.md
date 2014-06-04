@@ -49,9 +49,8 @@ function higherFunction({ x, y, ...restConfig }) {
 
 __Restructure using Object Spread Operator__
 ```javascript
-// Destructuring
-let { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 };
-// Restructuring
+let assembled = { x: 1, y: 2, a: 3, b: 4 };
+let { x, y, ...z } = assembled;
 let reassembled = { x, y, ...z };
 ```
 
