@@ -65,6 +65,14 @@ function higherFunction({ x, y, ...restConfig }) {
 }
 ```
 
+__Caveat: Only Own Properties__
+```javascript
+function ownX({ ...properties }) {
+  return properties.x;
+}
+ownX(Object.create({ x: 1 })); // undefined
+```
+
 __Restructure using Object Spread Operator__
 ```javascript
 let assembled = { x: 1, y: 2, a: 3, b: 4 };

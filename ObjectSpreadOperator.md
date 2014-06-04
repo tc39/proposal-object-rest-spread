@@ -3,7 +3,7 @@ Object Spread Initializer
 
 ### Examples ###
 
-__Shallow Clone__
+__Shallow Clone (Excluding prototype Chain)__
 ```javascript
 let aClone = { ...a };
 ```
