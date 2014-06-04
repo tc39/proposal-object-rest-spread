@@ -164,9 +164,9 @@ a { x = 1, y = 2 }
 http://www.haskell.org/haskellwiki/Default_values_in_records
 
 ### Possible Future Additions ###
-#### NOT PART OF MINIMAL PROPOSAL ####
+#### NOT PART OF THE MINIMAL PROPOSAL ####
 
-In the future we can add sugar for referring to the previous value in preceding spreads.
+In the future we can add sugar for referring to the previous value in preceding spreads. This is something that function calls alone cannot do.
 
 __Implicit Identifier in Deep Updates__
 ```javascript
@@ -193,18 +193,4 @@ let agingUser = {
   age++,
   height-=5
 };
-```
-
-### Destructuring Parallel ###
-
-This proposal could be expanded with a parallel destructuring proposal. The runtime semantics of `...` _DestructuringAssignmentTarget_ in an object destructuring's _AssignmentProperty_ would be collecting all the remaining properties into a new object.
-
-```javascript
-let { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 };
-x; // 1
-y; // 2
-z; // { a: 3, b: 4 }
-
-let n = { x, y, ...z };
-n; // { x: 1, y: 2, a: 3, b: 4 }
 ```
