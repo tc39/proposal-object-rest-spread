@@ -1,52 +1,5 @@
-### Syntax ###
-
-PropertyDefinitionList:
-- PropertyDefinition
-- PropertyDefinitionList `,` PropertyDefinition
-
-PropertyDefinition:
-- `...` AssignmentExpression
-- etc.
-
-
-### Runtime Semantics: PropertyDefinitionEvaluation ###
-
-With parameter `object`.
-
-_PropertyDefinition : `...` AssignmentExpression_
-
-NOTE: This follows the same semantics as Object.assign(`object`, _AssignmentExpression_).
-
-1. Let `exprValue` be the result of evaluating _AssignmentExpression_.
-2. Let `propValue` be GetValue(`exprValue`).
-3. ReturnIfAbrupt(propValue).
-4. Let `from` be ToObject(`propValue`).
-5. ReturnIfAbrupt(`from`).
-6. Let `keysArray` be the result of calling the [[OwnPropertyKeys]] internal method of `propValue`.
-7. ReturnIfAbrupt(`keysArray`).
-8. Let `lenValue` be Get(`keysArray`, __"length"__).
-9. Let `len` be ToLength(`lenValue`).
-10. ReturnIfAbrupt(`len`).
-11. Let `nextIndex` be 0.
-12. Let `pendingException` be __undefined__.
-13. Repeat while `nextIndex` < `len`,
-  1. Let `nextKey` be Get(`keysArray`, ToString(`nextIndex`)).
-  2. ReturnIfAbrupt(`nextKey`).
-  3. Let desc be the result of calling the [[GetOwnProperty]] internal method of from with argument `nextKey`.
-  4. If `desc` is an abrupt completion, then
-    1. If `pendingException` is __undefined__, then set `pendingException` to `desc`.
-  5. Else if `desc` is not __undefined__ and `desc`.[[Enumerable]] is __true__, then
-    1. Let `propValue` be Get(`from`, `nextKey`).
-    2. If `propValue` is an abrupt completion, then
-      1. If `pendingException` is __undefined__, then set `pendingException` to `propValue`.
-    3. else
-      1. Let `status` be Put(`object`, `nextKey`, `propValue`, __true__);
-      2. If `status` is an abrupt completion, then
-        1. If `pendingException` is __undefined__, then set `pendingException` to `status`.
-  6. Increment `nextIndex` by 1.
-14. If `pendingException` is not __undefined__, then return `pendingException`.
-15. return `true`
-
+Object Spread
+-------------
 
 ### Examples ###
 
@@ -142,6 +95,55 @@ let newVersion = {
   items: [...previousVersion.items, { title: 'New Item' }] // Add an item to the list of items
 };
 ```
+
+### Syntax ###
+
+PropertyDefinitionList:
+- PropertyDefinition
+- PropertyDefinitionList `,` PropertyDefinition
+
+PropertyDefinition:
+- `...` AssignmentExpression
+- etc.
+
+
+### Runtime Semantics: PropertyDefinitionEvaluation ###
+
+With parameter `object`.
+
+_PropertyDefinition : `...` AssignmentExpression_
+
+NOTE: This follows the same semantics as Object.assign(`object`, _AssignmentExpression_).
+
+1. Let `exprValue` be the result of evaluating _AssignmentExpression_.
+2. Let `propValue` be GetValue(`exprValue`).
+3. ReturnIfAbrupt(propValue).
+4. Let `from` be ToObject(`propValue`).
+5. ReturnIfAbrupt(`from`).
+6. Let `keysArray` be the result of calling the [[OwnPropertyKeys]] internal method of `propValue`.
+7. ReturnIfAbrupt(`keysArray`).
+8. Let `lenValue` be Get(`keysArray`, __"length"__).
+9. Let `len` be ToLength(`lenValue`).
+10. ReturnIfAbrupt(`len`).
+11. Let `nextIndex` be 0.
+12. Let `pendingException` be __undefined__.
+13. Repeat while `nextIndex` < `len`,
+  1. Let `nextKey` be Get(`keysArray`, ToString(`nextIndex`)).
+  2. ReturnIfAbrupt(`nextKey`).
+  3. Let desc be the result of calling the [[GetOwnProperty]] internal method of from with argument `nextKey`.
+  4. If `desc` is an abrupt completion, then
+    1. If `pendingException` is __undefined__, then set `pendingException` to `desc`.
+  5. Else if `desc` is not __undefined__ and `desc`.[[Enumerable]] is __true__, then
+    1. Let `propValue` be Get(`from`, `nextKey`).
+    2. If `propValue` is an abrupt completion, then
+      1. If `pendingException` is __undefined__, then set `pendingException` to `propValue`.
+    3. else
+      1. Let `status` be Put(`object`, `nextKey`, `propValue`, __true__);
+      2. If `status` is an abrupt completion, then
+        1. If `pendingException` is __undefined__, then set `pendingException` to `status`.
+  6. Increment `nextIndex` by 1.
+14. If `pendingException` is not __undefined__, then return `pendingException`.
+15. return `true`
 
 ### Prior Art ###
 
