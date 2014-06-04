@@ -168,7 +168,7 @@ a { x = 1, y = 2 }
 http://www.haskell.org/haskellwiki/Default_values_in_records
 
 ### Possible Future Additions ###
-#### NOT PART OF THE MINIMAL PROPOSAL ####
+#### NOT PART OF THE INITIAL MINIMAL PROPOSAL ####
 
 In the future we can add sugar for referring to the previous value in preceding spreads. This is something that function calls alone cannot do.
 
