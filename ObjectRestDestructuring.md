@@ -114,7 +114,7 @@ The runtime semantics of `...` _DestructuringAssignmentTarget_ in an object dest
 
 __Successor-ML__
 ```ml
-  val { x = x, y = y, ... = z } = obj
+val { x = x, y = y, ... = z } = obj
 ```
 http://successor-ml.org/index.php?title=Functional_record_extension_and_row_capture
 (Mentioned on the destructuring assignment wiki http://wiki.ecmascript.org/doku.php?id=discussion:destructuring_assignment#successor-ml_and_row_capture )
