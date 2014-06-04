@@ -109,3 +109,11 @@ BindingRestProperty:
 ### Runtime Semantics ###
 
 The runtime semantics of `...` _DestructuringAssignmentTarget_ in an object destructuring's _AssignmentProperty_ would be collecting all the remaining properties into a new object.
+
+### Prior Art ###
+
+```ml
+  val { x = x, y = y, ... = z } = obj
+```
+http://successor-ml.org/index.php?title=Functional_record_extension_and_row_capture
+(Mentioned on the destructuring assignment wiki http://wiki.ecmascript.org/doku.php?id=discussion:destructuring_assignment#successor-ml_and_row_capture )
