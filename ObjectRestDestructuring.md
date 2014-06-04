@@ -54,6 +54,36 @@ let { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 };
 let reassembled = { x, y, ...z };
 ```
 
+__Runtime Error__
+```javascript
+let { x, y, ...z } = null; // runtime error
+```
+
+__Static Error__
+```javascript
+let { ...x, y, z } = obj; // syntax error
+```
+```javascript
+let { x, ...y, ...z } = obj; // syntax error
+```
+
+### Syntax ###
+
+ObjectAssignmentPattern:
+- `{` AssignmentRestProperty `}`
+- `{` AssignmentPropertyList `,` AssignmentRestProperty `}`
+- etc.
+
+AssignmentRestProperty:
+- `...` DestructuringAssignmentTarget
+
+ObjectBindingPattern:
+- `{` BindingRestProperty `}`
+- `{` BindingPropertyList `,` BindingRestProperty `}`
+- etc.
+
+BindingRestProperty:
+- `...` BindingIdentifier
 
 ### Runtime Semantics ###
 

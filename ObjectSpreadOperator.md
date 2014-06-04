@@ -26,6 +26,8 @@ __Overiding Properties__
 let aWithOverrides = { ...a, x: 1, y: 2 };
 // equivalent to
 let aWithOverrides = { ...a, ...{ x: 1, y: 2 } };
+// equivalent to
+let x = 1, y = 2, aWithOverrides = { ...a, x, y };
 ```
 _Desugars into:_
 ```javascript
