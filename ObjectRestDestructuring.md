@@ -171,6 +171,20 @@ _SingleNameBinding : BindingIdentifier Initializer<sub>opt</sub>_
 
 The runtime semantics of `...` _IdentifierReference_ in an object destructuring's _AssignmentProperty_ would be collecting all the properties into a new object except BindingPropertyNames of _AssignmentPropertyList_.
 
+### Issues ###
+
+Only own properties are listed in the rest object. This means that explicitly listing out properties have different semantics.
+
+```javascript
+let { x, ...z } = n, y = z.y;
+```
+is not equivalent to:
+```javascript
+let { x, y, ...z } = n;
+```
+
+Getters are executed rather than copying the descriptors over. The prototype is lost.
+
 ### Prior Art ###
 
 __Successor-ML__
