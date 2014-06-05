@@ -143,9 +143,29 @@ _AssignmentProperty : PropertyName `:` AssignmentElement_
 
 1. Return a new __List__ containing _PropertyName_.
 
-### Runtime Semantics: AssignmentInitialization ###
+### Runtime Semantics: DestructuringAssignmentEvaluation ###
 
-TODO
+_ObjectAssignmentPattern: `{` `...` IdentifierReference `}`_
+
+1. Let `excludedNames` be a new empty __List__.
+2. Let `restObj` be ObjectCreate(%ObjectPrototype%).
+3. Let `assignStatus` be Assign(`restObj`, `obj`, `excludedNames`).
+4. ReturnIfAbrupt(`assignStatus`).
+5. Let `P` be StringValue of IdentifierReference.
+6. Let `lref` be ResolveBinding(`P`).
+7. Return PutValue(`lref`,`restObj`).
+
+_ObjectAssignmentPattern: `{` AssignmentPropertyList `,` `...` IdentifierReference `}`_
+
+1. Let `excludedNames` be AssignmentPropertyNames of _AssignmentPropertyList_.
+2. Let `status` be the result of performing DestructuringAssignmentEvaluation for _AssignmentPropertyList_ using `obj` as the argument.
+3. ReturnIfAbrupt(`status`).
+4. Let `restObj` be ObjectCreate(%ObjectPrototype%).
+5. Let `assignStatus` be Assign(`restObj`, `obj`, `excludedNames`).
+6. ReturnIfAbrupt(`assignStatus`).
+7. Let `P` be StringValue of IdentifierReference.
+8. Let `lref` be ResolveBinding(`P`).
+9. Return PutValue(`lref`,`restObj`).
 
 ### Static Semantics: BindingPropertyNames ###
 
@@ -178,21 +198,20 @@ With parameters `value` and `environment`.
 _ObjectBindingPattern : `...` BindingIdentifier_
 
 1. Let `excludedNames` be a new empty __List__.
-2. Let `obj` be ObjectCreate(%ObjectPrototype%).
-3. Let `assignStatus` be Assign(`obj`, `value`, `excludedNames`).
+2. Let `restObj` be ObjectCreate(%ObjectPrototype%).
+3. Let `assignStatus` be Assign(`restObj`, `value`, `excludedNames`).
 4. ReturnIfAbrupt(`assignStatus`).
-5. Return the result of performing BindingInitialization for _BindingIdentifier_ using `obj` and `environment` as arguments.
+5. Return the result of performing BindingInitialization for _BindingIdentifier_ using `restObj` and `environment` as arguments.
 
 _ObjectBindingPattern : BindingPropertyList `,` `...` BindingIdentifier_
 
 1. Let `excludedNames` be BindingPropertyNames of _BindingPropertyList_.
 2. Let `status` be the result of performing BindingInitialization for _BindingPropertyList_ using `value` and `environment` as arguments.
 3. ReturnIfAbrupt(`status`).
-4. Let `obj` be ObjectCreate(%ObjectPrototype%).
-5. Let `assignStatus` be Assign(`obj`, `value`, `excludedNames`).
+4. Let `restObj` be ObjectCreate(%ObjectPrototype%).
+5. Let `assignStatus` be Assign(`restObj`, `value`, `excludedNames`).
 6. ReturnIfAbrupt(`assignStatus`).
-7. Return the result of performing BindingInitialization for _BindingIdentifier_ using `obj` and `environment` as arguments.
-
+7. Return the result of performing BindingInitialization for _BindingIdentifier_ using `restObj` and `environment` as arguments.
 
 ### Issues ###
 
