@@ -143,6 +143,10 @@ _AssignmentProperty : PropertyName `:` AssignmentElement_
 
 1. Return a new __List__ containing _PropertyName_.
 
+### Runtime Semantics: AssignmentInitialization ###
+
+TODO
+
 ### Static Semantics: BindingPropertyNames ###
 
 _BindingPropertyList : BindingProperty_
@@ -167,9 +171,28 @@ _SingleNameBinding : BindingIdentifier Initializer<sub>opt</sub>_
 
 1. Return a new __List__ containing _BindingIdentifier_.
 
-### Runtime Semantics ###
+### Runtime Semantics: BindingInitialization ###
 
-The runtime semantics of `...` _IdentifierReference_ in an object destructuring's _AssignmentProperty_ would be collecting all the properties into a new object except BindingPropertyNames of _AssignmentPropertyList_.
+With parameters `value` and `environment`.
+
+_ObjectBindingPattern : `...` BindingIdentifier_
+
+1. Let `excludedNames` be a new empty __List__.
+2. Let `obj` be ObjectCreate(%ObjectPrototype%).
+3. Let `assignStatus` be Assign(`obj`, `value`, `excludedNames`).
+4. ReturnIfAbrupt(`assignStatus`).
+5. Return the result of performing BindingInitialization for _BindingIdentifier_ using `obj` and `environment` as arguments.
+
+_ObjectBindingPattern : BindingPropertyList `,` `...` BindingIdentifier_
+
+1. Let `excludedNames` be BindingPropertyNames of _BindingPropertyList_.
+2. Let `status` be the result of performing BindingInitialization for _BindingPropertyList_ using `value` and `environment` as arguments.
+3. ReturnIfAbrupt(`status`).
+4. Let `obj` be ObjectCreate(%ObjectPrototype%).
+5. Let `assignStatus` be Assign(`obj`, `value`, `excludedNames`).
+6. ReturnIfAbrupt(`assignStatus`).
+7. Return the result of performing BindingInitialization for _BindingIdentifier_ using `obj` and `environment` as arguments.
+
 
 ### Issues ###
 
