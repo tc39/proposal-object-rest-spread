@@ -78,6 +78,14 @@ function ownX({ ...properties }) {
 ownX(Object.create({ x: 1 })); // undefined
 ```
 
+```javascript
+let { x, y, ...z } = a;
+// is not equivalent to
+let { x, ...n } = a;
+let { y, ...z } = n;
+// because x and y use the prototype chain
+```
+
 __Restructure using Object Spread Operator__
 ```javascript
 let assembled = { x: 1, y: 2, a: 3, b: 4 };
@@ -104,20 +112,14 @@ let { x: { ...z }, y: { ...z } } = obj; // static error
 ### Syntax ###
 
 ObjectAssignmentPattern:
-- `{` AssignmentRestProperty `}`
-- `{` AssignmentPropertyList `,` AssignmentRestProperty `}`
+- `{` `...` IdentifierReference `}`
+- `{` AssignmentPropertyList `,` `...` IdentifierReference `}`
 - etc.
-
-AssignmentRestProperty:
-- `...` DestructuringAssignmentTarget
 
 ObjectBindingPattern:
-- `{` BindingRestProperty `}`
-- `{` BindingPropertyList `,` BindingRestProperty `}`
+- `{` `...` BindingIdentifier `}`
+- `{` BindingPropertyList `,` `...` BindingIdentifier `}`
 - etc.
-
-BindingRestProperty:
-- `...` BindingIdentifier
 
 ### Static Semantics: AssignmentPropertyNames ###
 
@@ -165,7 +167,7 @@ _SingleNameBinding : BindingIdentifier Initializer<sub>opt</sub>_
 
 ### Runtime Semantics ###
 
-The runtime semantics of `...` _DestructuringAssignmentTarget_ in an object destructuring's _AssignmentProperty_ would be collecting all the properties into a new object except BindingPropertyNames of _AssignmentPropertyList_.
+The runtime semantics of `...` _IdentifierReference_ in an object destructuring's _AssignmentProperty_ would be collecting all the properties into a new object except BindingPropertyNames of _AssignmentPropertyList_.
 
 ### Prior Art ###
 

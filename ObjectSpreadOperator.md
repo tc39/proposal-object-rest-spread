@@ -117,8 +117,22 @@ _PropertyDefinition : `...` AssignmentExpression_
 
 1. Let `exprValue` be the result of evaluating _AssignmentExpression_.
 2. Let `fromValue` be GetValue(`exprValue`).
-3. Let `exclusion` be a new empty __List__.
-4. Return Assign(`object`, `fromValue`, `exclusion`).
+3. Let `excludedNames` be a new empty __List__.
+4. Return Assign(`object`, `fromValue`, `excludedNames`).
+
+### Open Issues ###
+
+This only copies own properties just like Object.assign. You could imagine all enumerable properties on the prototype chain being copied.
+
+It's strange that accessor definitions are special. An alternative proposal could copy all the property definitions instead of evaluating them.
+
+According to the current spec semantics, setters are executed when they're overridden. It might make more sense to define property rather than invoking any setters.
+
+```javascript
+let z = { set x() { this.y; /* undefined */ }, ...{ x: 1 }, y: 2 };
+```
+
+Unclear if setters on the prototype chain should be invoked if `__proto__` is defined inline.
 
 ### Prior Art ###
 
@@ -147,7 +161,7 @@ a { x = 1, y = 2 }
 http://www.haskell.org/haskellwiki/Default_values_in_records
 
 ### Possible Future Additions ###
-#### NOT PART OF THE INITIAL MINIMAL PROPOSAL ####
+#### NOT PART OF THE INITIAL MINIMAL PROPOSAL AND ARE CONTROVERSIAL ####
 
 In the future we can add sugar for referring to the previous value in preceding spreads. This is something that function calls alone cannot do.
 
