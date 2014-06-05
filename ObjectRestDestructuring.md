@@ -195,7 +195,7 @@ _SingleNameBinding : BindingIdentifier Initializer<sub>opt</sub>_
 
 With parameters `value` and `environment`.
 
-_ObjectBindingPattern : `...` BindingIdentifier_
+_ObjectBindingPattern : `{` `...` BindingIdentifier `}`_
 
 1. Let `excludedNames` be a new empty __List__.
 2. Let `restObj` be ObjectCreate(%ObjectPrototype%).
@@ -203,7 +203,7 @@ _ObjectBindingPattern : `...` BindingIdentifier_
 4. ReturnIfAbrupt(`assignStatus`).
 5. Return the result of performing BindingInitialization for _BindingIdentifier_ using `restObj` and `environment` as arguments.
 
-_ObjectBindingPattern : BindingPropertyList `,` `...` BindingIdentifier_
+_ObjectBindingPattern : `{` BindingPropertyList `,` `...` BindingIdentifier `}`_
 
 1. Let `excludedNames` be BindingPropertyNames of _BindingPropertyList_.
 2. Let `status` be the result of performing BindingInitialization for _BindingPropertyList_ using `value` and `environment` as arguments.
