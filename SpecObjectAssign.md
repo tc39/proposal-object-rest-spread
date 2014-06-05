@@ -1,6 +1,6 @@
 ### Assign (T, S, E) ###
 
-NOTE: These spec proposals refer to the abstract operation Assign (`T`, `S`) which follow the same semantics as Object.assign(`T`, `S`) in the ES6 spec with the addition of the `E` argument which is a list of properties to be excluded.
+NOTE: These spec proposals refer to the abstract operation Assign (`T`, `S`, `E`) which follow the same semantics as Object.assign(`T`, `S`) in the ES6 spec with the addition of the `E` argument which is a list of properties to be excluded.
 
 1. Assert: Type(`T`) is Object.
 2. Let `from` be ToObject(`S`).
