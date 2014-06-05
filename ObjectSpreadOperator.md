@@ -21,7 +21,7 @@ _Desugars into:_
 let ab = Object.assign({}, a, b);
 ```
 
-__Overiding Properties__
+__Overriding Properties__
 ```javascript
 let aWithOverrides = { ...a, x: 1, y: 2 };
 // equivalent to
