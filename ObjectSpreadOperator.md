@@ -120,11 +120,11 @@ _PropertyDefinition : `...` AssignmentExpression_
 3. Let `excludedNames` be a new empty __List__.
 4. Return Assign(`object`, `fromValue`, `excludedNames`).
 
-### Open Issues ###
+### Issues ###
 
-This only copies own properties just like Object.assign. You could imagine all enumerable properties on the prototype chain being copied.
+This only copies own properties just like Object.assign. You could imagine all enumerable properties on the prototype chain being copied. I believe the same arguments for Object.assign not doing that applies here as well.
 
-It's strange that accessor definitions are special. An alternative proposal could copy all the property definitions instead of evaluating them.
+It's strange that accessor definitions are special. An alternative proposal could copy all the property definitions instead of evaluating them. That would violate the abstraction that getters provide.
 
 According to the current spec semantics, setters are executed when they're overridden. It might make more sense to define property rather than invoking any setters.
 

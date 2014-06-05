@@ -39,7 +39,7 @@ __Extending a Function with Additional Options__
 function baseFunction({ a, b }) {
   // ...
 }
-function higherFunction({ x, y, ...restConfig }) {
+function wrapperFunction({ x, y, ...restConfig }) {
   // do something with x and y
   // pass the rest to the base function
   return baseFunction(restConfig);
@@ -52,19 +52,19 @@ Extra properties may be safely added to `baseFunction`.
 function baseFunction({ a, b, x }) {
   // ...
 }
-function higherFunction({ x, y, ...restConfig }) {
+function wrapperFunction({ x, y, ...restConfig }) {
   // x won't be accidentally passed to baseFunction after this refactor
   return baseFunction(restConfig);
 }
 ```
 
-If the higher order function wants to consume the x property but also pass it along, it can remerge it in using the spread operator.
+If the wrapper function wants to consume the x property but also pass it along, it can remerge it in using the spread operator.
 
 ```javascript
 function baseFunction({ a, b, x }) {
   // ...
 }
-function higherFunction({ x, y, ...restConfig }) {
+function wrapperFunction({ x, y, ...restConfig }) {
   // explicitly pass x along
   return baseFunction({ ...restConfig, x });
 }
@@ -115,6 +115,8 @@ ObjectAssignmentPattern:
 - `{` `...` IdentifierReference `}`
 - `{` AssignmentPropertyList `,` `...` IdentifierReference `}`
 - etc.
+
+NOTE: This is explicitly disallowing nested object destructuring in the rest position. This is to avoid confusing syntax/semantics with regard to own vs. inherited properties.
 
 ObjectBindingPattern:
 - `{` `...` BindingIdentifier `}`
