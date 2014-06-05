@@ -117,7 +117,8 @@ _PropertyDefinition : `...` AssignmentExpression_
 
 1. Let `exprValue` be the result of evaluating _AssignmentExpression_.
 2. Let `fromValue` be GetValue(`exprValue`).
-3. Return Assign(`object`, `fromValue`).
+3. Let `exclusion` be a new empty __List__.
+4. Return Assign(`object`, `fromValue`, `exclusion`).
 
 ### Prior Art ###
 

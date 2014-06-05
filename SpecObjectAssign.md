@@ -1,6 +1,6 @@
-### Assign (T, S) ###
+### Assign (T, S, E) ###
 
-These spec proposals refer to the abstract operation Assign (`T`, `S`) which follow the same semantics as Object.assign(`T`, `S`) in the ES6 spec.
+NOTE: These spec proposals refer to the abstract operation Assign (`T`, `S`) which follow the same semantics as Object.assign(`T`, `S`) in the ES6 spec with the addition of the `E` argument which is a list of properties to be excluded.
 
 1. Assert: Type(`T`) is Object.
 2. Let `from` be ToObject(`S`).
@@ -18,7 +18,7 @@ These spec proposals refer to the abstract operation Assign (`T`, `S`) which fol
   3. Let `desc` be the result of calling the [[GetOwnProperty]] internal method of `from` with argument `nextKey`.
   4. If `desc` is an abrupt completion, then
     1. If `pendingException` is __undefined__, then set `pendingException` to `desc`.
-  5. Else if `desc` is not __undefined__ and `desc`.[[Enumerable]] is __true__, then
+  5. Else if `desc` is not __undefined__ and `desc`.[[Enumerable]] is __true__ and `nextKey` is not contained in `E` then
     1. Let `propValue` be Get(`from`, `nextKey`).
     2. If `propValue` is an abrupt completion, then
       1. If `pendingException` is __undefined__, then set `pendingException` to `propValue`.
