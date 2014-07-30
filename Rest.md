@@ -105,9 +105,6 @@ let { ...x, y, z } = obj; // syntax error
 ```javascript
 let { x, ...y, ...z } = obj; // syntax error
 ```
-```javascript
-let { x: { ...z }, y: { ...z } } = obj; // static error
-```
 
 ### Syntax ###
 

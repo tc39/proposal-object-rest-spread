@@ -83,11 +83,6 @@ __Setters Are Not Executed When They're Redefined__
 let z = { set x() { throw new Error(); }, ...{ x: 1 } }; // No error
 ```
 
-__Static Error__
-```javascript
-let doubleX = { x: 1, ...a, x: 2 }; // static error in strict mode
-```
-
 __Null/Undefined Are Ignored__
 ```javascript
 let emptyObject = { ...null, ...undefined }; // no runtime error
