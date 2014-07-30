@@ -88,9 +88,9 @@ __Static Error__
 let doubleX = { x: 1, ...a, x: 2 }; // static error in strict mode
 ```
 
-__Runtime Error__
+__Null/Undefined Are Ignored__
 ```javascript
-let nonObject = { ...null }; // throws TypeError exception
+let emptyObject = { ...null, ...undefined }; // no runtime error
 ```
 
 __Updating Deep Immutable Object__
@@ -121,8 +121,9 @@ _PropertyDefinition : `...` AssignmentExpression_
 
 1. Let `exprValue` be the result of evaluating _AssignmentExpression_.
 2. Let `fromValue` be GetValue(`exprValue`).
-3. Let `excludedNames` be a new empty __List__.
-4. Return [Assign(`object`, `fromValue`, `excludedNames`)](Assign.md).
+3. If `fromValue` is either __undefined__ or __null__, then return __true__.
+4. Let `excludedNames` be a new empty __List__.
+5. Return [Assign(`object`, `fromValue`, `excludedNames`)](Assign.md).
 
 ### Issues ###
 

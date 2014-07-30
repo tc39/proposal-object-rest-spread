@@ -28,4 +28,4 @@ NOTE: These spec proposals refer to the abstract operation Assign (`T`, `S`, `E`
         1. If `pendingException` is __undefined__, then set `pendingException` to `status`.
   6. Increment `nextIndex` by 1.
 12. If `pendingException` is not __undefined__, then return `pendingException`.
-13. return `true`
+13. return __true__
