@@ -118,7 +118,7 @@ _PropertyDefinition : `...` AssignmentExpression_
 1. Let `exprValue` be the result of evaluating _AssignmentExpression_.
 2. Let `fromValue` be GetValue(`exprValue`).
 3. Let `excludedNames` be a new empty __List__.
-4. Return Assign(`object`, `fromValue`, `excludedNames`).
+4. Return [Assign(`object`, `fromValue`, `excludedNames`)](Assign.md).
 
 ### Issues ###
 
@@ -159,39 +159,3 @@ __Haskell__
 a { x = 1, y = 2 }
 ```
 http://www.haskell.org/haskellwiki/Default_values_in_records
-
-### Possible Future Additions ###
-#### NOT PART OF THE INITIAL MINIMAL PROPOSAL AND ARE CONTROVERSIAL ####
-
-In the future we can add sugar for referring to the previous value in preceding spreads. This is something that function calls alone cannot do.
-
-__Implicit Identifier in Deep Updates__
-```javascript
-let newVersion = {
-  ...previousVersion,
-  name: 'New Name', // Override the name property
-  address: { ... , zipCode: '99999' } // Update nested zip code
-  items: [... , { title: 'New Item' }] // Add an item to the list of items
-};
-```
-
-__Excluding a Property Name__
-```javascript
-let userWithoutAddress = {
-  ...user,
-  delete address
-};
-```
-_Equivalent to:_
-```javascript
-let { address, ...userWithoutAddress } = user;
-```
-
-__Increment/Decrement a Property__
-```javascript
-let agingUser = {
-  ...user,
-  age++,
-  height-=5
-};
-```
