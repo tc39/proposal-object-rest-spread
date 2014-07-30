@@ -78,6 +78,11 @@ __Getters in the Spread Object__
 let runtimeError = { ...a, ...{ get x() { throws new Error('thrown now') } } };
 ```
 
+__Setters Are Not Executed When They're Redefined__
+```javascript
+let z = { set x() { throw new Error(); }, ...{ x: 1 } }; // No error
+```
+
 __Static Error__
 ```javascript
 let doubleX = { x: 1, ...a, x: 2 }; // static error in strict mode
@@ -108,7 +113,6 @@ PropertyDefinition:
 - `...` AssignmentExpression
 - etc.
 
-
 ### Runtime Semantics: PropertyDefinitionEvaluation ###
 
 With parameter `object`.
@@ -122,17 +126,9 @@ _PropertyDefinition : `...` AssignmentExpression_
 
 ### Issues ###
 
-This only copies own properties just like Object.assign. You could imagine all enumerable properties on the prototype chain being copied. I believe the same arguments for Object.assign not doing that applies here as well.
-
-It's strange that accessor definitions are special. An alternative proposal could copy all the property definitions instead of evaluating them. That would violate the abstraction that getters provide.
-
-According to the current spec semantics, setters are executed when they're overridden. It might make more sense to define property rather than invoking any setters.
-
-```javascript
-let z = { set x() { this.y; /* undefined */ }, ...{ x: 1 }, y: 2 };
-```
-
-Unclear if setters on the prototype chain should be invoked if `__proto__` is defined inline.
+This only copies own properties just like Object.assign. You could imagine all enumerable properties on the prototype chain being copied. I believe the same arguments for Object.assign not doing that applies here as well. Namely that
+Object.prototype can be tainted and therefore would jeopardize the integrity of
+the code using this syntax.
 
 ### Prior Art ###
 

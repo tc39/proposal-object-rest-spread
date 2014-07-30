@@ -23,7 +23,7 @@ NOTE: These spec proposals refer to the abstract operation Assign (`T`, `S`, `E`
     2. If `propValue` is an abrupt completion, then
       1. If `pendingException` is __undefined__, then set `pendingException` to `propValue`.
     3. else
-      1. Let `status` be Put(`T`, `nextKey`, `propValue`, __true__);
+      1. Let `status` be CreateDataProperty(`T`, `nextKey`, `propValue`);
       2. If `status` is an abrupt completion, then
         1. If `pendingException` is __undefined__, then set `pendingException` to `status`.
   6. Increment `nextIndex` by 1.

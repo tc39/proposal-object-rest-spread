@@ -3,7 +3,7 @@ Object Rest/Spread Properties for ECMAScript
 
 ECMAScript 6 introduces [rest elements](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) for array destructuring assignment and [spread elements](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) for array literals.
 
-This proposal introduces the analogous [rest properties](Rest.md) for object destructuring assignment and [spread properties](Spread.md) for object literals.
+This proposal introduces analogous [rest properties](Rest.md) for object destructuring assignment and [spread properties](Spread.md) for object literals.
 
 ### [Rest Properties](Rest.md)
 
