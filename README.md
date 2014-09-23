@@ -25,9 +25,9 @@ let n = { x, y, ...z };
 n; // { x: 1, y: 2, a: 3, b: 4 }
 ```
 
-## Status of this Proposal
+## [Status of this Proposal](https://github.com/tc39/ecma262)
 
-A polyfill of this proposal was implemented in [JSTransform](https://github.com/facebook/jstransform) which can compile rest and spread properties syntax to ES6 code.
+A polyfill of this proposal was implemented in [JSTransform](https://github.com/facebook/jstransform) which can compile rest and spread properties syntax to ES6 code. It is a Stage 0 proposal for ECMAScript 7.
 
 ## [Known Issues](Issues.md)
 
