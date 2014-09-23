@@ -210,20 +210,6 @@ _ObjectBindingPattern : `{` BindingPropertyList `,` `...` BindingIdentifier `}`_
 6. ReturnIfAbrupt(`assignStatus`).
 7. Return the result of performing BindingInitialization for _BindingIdentifier_ using `restObj` and `environment` as arguments.
 
-### Issues ###
-
-Only own properties are listed in the rest object. This means that explicitly listing out properties have different semantics.
-
-```javascript
-let { x, ...z } = n, y = z.y;
-```
-is not equivalent to:
-```javascript
-let { x, y, ...z } = n;
-```
-
-Getters are executed rather than copying the descriptors over. The prototype is lost.
-
 ### Prior Art ###
 
 __Successor-ML__

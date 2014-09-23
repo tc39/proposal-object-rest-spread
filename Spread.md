@@ -120,12 +120,6 @@ _PropertyDefinition : `...` AssignmentExpression_
 4. Let `excludedNames` be a new empty __List__.
 5. Return [Assign(`object`, `fromValue`, `excludedNames`)](Assign.md).
 
-### Issues ###
-
-This only copies own properties just like Object.assign. You could imagine all enumerable properties on the prototype chain being copied. I believe the same arguments for Object.assign not doing that applies here as well. Namely that
-Object.prototype can be tainted and therefore would jeopardize the integrity of
-the code using this syntax.
-
 ### Prior Art ###
 
 __Successor-ML__

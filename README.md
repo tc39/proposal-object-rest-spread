@@ -28,3 +28,7 @@ n; // { x: 1, y: 2, a: 3, b: 4 }
 ## Status of this Proposal
 
 A polyfill of this proposal was implemented in [JSTransform](https://github.com/facebook/jstransform) which can compile rest and spread properties syntax to ES6 code.
+
+## [Known Issues](Issues.md)
+
+This proposal only iterates over __own__ properties. [See why this matters.](Issues.md)
