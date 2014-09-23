@@ -16,6 +16,8 @@ is not equivalent to:
 let { x, y, ...z } = n;
 ```
 
+This might be confusing but the mental model is that `...` is not a convenience for copying the entire object, instead it's a convenience for expanding all enumerable own keys.
+
 #### Security Consideration
 
 Syntax introduces a new way to determine ownness without going through (patchable) library functions:
