@@ -33,12 +33,12 @@ ObjectAssignmentPattern:
 - `{` AssignmentPropertyList `,` `...` IdentifierReference `}`
 - etc.
 
-NOTE: This is explicitly disallowing nested object destructuring in the rest position. This is to avoid confusing syntax/semantics with regard to own vs. inherited properties.
-
 ObjectBindingPattern:
 - `{` `...` BindingIdentifier `}`
 - `{` BindingPropertyList `,` `...` BindingIdentifier `}`
 - etc.
+
+NOTE: This is explicitly disallowing nested object destructuring in the rest position. This is to avoid confusing syntax/semantics with regard to own vs. inherited properties.
 
 ### Static Semantics: AssignmentPropertyNames ###
 
