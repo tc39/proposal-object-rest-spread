@@ -146,7 +146,7 @@ _ObjectAssignmentPattern: `{` `...` IdentifierReference `}`_
 
 1. Let `excludedNames` be a new empty __List__.
 2. Let `restObj` be ObjectCreate(%ObjectPrototype%).
-3. Let `assignStatus` be [Assign(`restObj`, `obj`, `excludedNames`)](Assign.md).
+3. Let `assignStatus` be [CopyDataProperties(`restObj`, `obj`, `excludedNames`)](CopyDataProperties.md).
 4. ReturnIfAbrupt(`assignStatus`).
 5. Let `P` be StringValue of IdentifierReference.
 6. Let `lref` be ResolveBinding(`P`).
@@ -158,7 +158,7 @@ _ObjectAssignmentPattern: `{` AssignmentPropertyList `,` `...` IdentifierReferen
 2. Let `status` be the result of performing DestructuringAssignmentEvaluation for _AssignmentPropertyList_ using `obj` as the argument.
 3. ReturnIfAbrupt(`status`).
 4. Let `restObj` be ObjectCreate(%ObjectPrototype%).
-5. Let `assignStatus` be [Assign(`restObj`, `obj`, `excludedNames`)](Assign.md).
+5. Let `assignStatus` be [CopyDataProperties(`restObj`, `obj`, `excludedNames`)](CopyDataProperties.md).
 6. ReturnIfAbrupt(`assignStatus`).
 7. Let `P` be StringValue of IdentifierReference.
 8. Let `lref` be ResolveBinding(`P`).
@@ -196,7 +196,7 @@ _ObjectBindingPattern : `{` `...` BindingIdentifier `}`_
 
 1. Let `excludedNames` be a new empty __List__.
 2. Let `restObj` be ObjectCreate(%ObjectPrototype%).
-3. Let `assignStatus` be [Assign(`restObj`, `value`, `excludedNames`)](Assign.md).
+3. Let `assignStatus` be [CopyDataProperties(`restObj`, `value`, `excludedNames`)](CopyDataProperties.md).
 4. ReturnIfAbrupt(`assignStatus`).
 5. Return the result of performing BindingInitialization for _BindingIdentifier_ using `restObj` and `environment` as arguments.
 
@@ -206,7 +206,7 @@ _ObjectBindingPattern : `{` BindingPropertyList `,` `...` BindingIdentifier `}`_
 2. Let `status` be the result of performing BindingInitialization for _BindingPropertyList_ using `value` and `environment` as arguments.
 3. ReturnIfAbrupt(`status`).
 4. Let `restObj` be ObjectCreate(%ObjectPrototype%).
-5. Let `assignStatus` be [Assign(`restObj`, `value`, `excludedNames`)](Assign.md).
+5. Let `assignStatus` be [CopyDataProperties(`restObj`, `value`, `excludedNames`)](CopyDataProperties.md).
 6. ReturnIfAbrupt(`assignStatus`).
 7. Return the result of performing BindingInitialization for _BindingIdentifier_ using `restObj` and `environment` as arguments.
 

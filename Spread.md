@@ -58,7 +58,7 @@ let xyWithAandB = Object.assign({ x: 1 }, a, { y: 2 }, b, a);
 __Getters on the Object Initializer__
 ```javascript
 // Does not throw because .x isn't evaluated yet. It's defined.
-let aWithXGetter = { ...a, get x() { throws new Error('not thrown yet') } }; 
+let aWithXGetter = { ...a, get x() { throws new Error('not thrown yet') } };
 ```
 _Desugars into:_
 ```javascript
@@ -118,7 +118,7 @@ _PropertyDefinition : `...` AssignmentExpression_
 2. Let `fromValue` be GetValue(`exprValue`).
 3. If `fromValue` is either __undefined__ or __null__, then return __true__.
 4. Let `excludedNames` be a new empty __List__.
-5. Return [Assign(`object`, `fromValue`, `excludedNames`)](Assign.md).
+5. Return [CopyDataProperties(`object`, `fromValue`, `excludedNames`)](CopyDataProperties.md).
 
 ### Prior Art ###
 
