@@ -1,6 +1,8 @@
 Object Spread Initializer
 -------------------------
 
+[Specification](Spec.md#spread-properties)
+
 ### Examples ###
 
 __Shallow Clone (excluding prototype)__
@@ -97,28 +99,6 @@ let newVersion = {
   items: [...previousVersion.items, { title: 'New Item' }] // Add an item to the list of items
 };
 ```
-
-### Syntax ###
-
-PropertyDefinitionList:
-- PropertyDefinition
-- PropertyDefinitionList `,` PropertyDefinition
-
-PropertyDefinition:
-- `...` AssignmentExpression
-- etc.
-
-### Runtime Semantics: PropertyDefinitionEvaluation ###
-
-With parameter `object`.
-
-_PropertyDefinition : `...` AssignmentExpression_
-
-1. Let `exprValue` be the result of evaluating _AssignmentExpression_.
-2. Let `fromValue` be GetValue(`exprValue`).
-3. If `fromValue` is either __undefined__ or __null__, then return __true__.
-4. Let `excludedNames` be a new empty __List__.
-5. Return [CopyDataProperties(`object`, `fromValue`, `excludedNames`)](CopyDataProperties.md).
 
 ### Prior Art ###
 

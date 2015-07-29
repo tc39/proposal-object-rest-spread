@@ -5,6 +5,10 @@ ECMAScript 6 introduces [rest elements](https://developer.mozilla.org/en-US/docs
 
 This proposal introduces analogous [rest properties](Rest.md) for object destructuring assignment and [spread properties](Spread.md) for object literals.
 
+### [Specification](Spec.md)
+
+[Specification](Spec.md)
+
 ### [Rest Properties](Rest.md)
 
 Rest properties collect the remaining own enumerable property keys that are not already picked off by the destructuring pattern. Those keys and their values are copied onto a new object.
