@@ -29,9 +29,15 @@ let n = { x, y, ...z };
 n; // { x: 1, y: 2, a: 3, b: 4 }
 ```
 
+### Transpilers
+
+[Babel](https://babeljs.io/docs/usage/experimental/)
+
+[JSTransform](https://github.com/facebook/jstransform)
+
 ## [Status of this Proposal](https://github.com/tc39/ecma262)
 
-A polyfill of this proposal was implemented in [JSTransform](https://github.com/facebook/jstransform) which can compile rest and spread properties syntax to ES6 code. It is a Stage 1 proposal for ECMAScript 7.
+It is a Stage 1 proposal for ECMAScript 7, going on Stage 2.
 
 ## [Known Issues](Issues.md)
 
