@@ -40,7 +40,9 @@ ObjectBindingPattern:
 
 NOTE: This is explicitly disallowing nested object destructuring in the rest position. This is to avoid confusing syntax/semantics with regard to own vs. inherited properties.
 
-### Static Semantics: AssignmentPropertyNames ###
+### Runtime Semantics: AssignmentPropertyNames ###
+
+TODO: This part of the spec text contains a bug since it needs to perform KeyedDestructuringAssignmentEvaluation for each of these property names.
 
 _AssignmentPropertyList : AssignmentProperty_
 
@@ -58,7 +60,9 @@ _AssignmentProperty : IdentifierReference Initializer<sub>opt</sub>_
 
 _AssignmentProperty : PropertyName `:` AssignmentElement_
 
-1. Return a new __List__ containing _PropertyName_.
+1. Let `P` be the result of evaluating _PropertyName_
+2. ReturnIfAbrupt(`P`).
+3. Return a new __List__ containing `P`.
 
 ### Runtime Semantics: DestructuringAssignmentEvaluation ###
 
@@ -84,7 +88,9 @@ _ObjectAssignmentPattern: `{` AssignmentPropertyList `,` `...` IdentifierReferen
 8. Let `lref` be ResolveBinding(`P`).
 9. Return PutValue(`lref`,`restObj`).
 
-### Static Semantics: BindingPropertyNames ###
+### Runtime Semantics: BindingPropertyNames ###
+
+TODO: This part of the spec text contains a bug since it needs to perform BindingInitialization for each of these property names.
 
 _BindingPropertyList : BindingProperty_
 
@@ -98,7 +104,9 @@ _BindingPropertyList : BindingPropertyList , BindingProperty_
 
 _BindingProperty : PropertyName `:` BindingElement_
 
-1. Return a new __List__ containing _PropertyName_.
+1. Let `P` be the result of evaluating _PropertyName_
+2. ReturnIfAbrupt(`P`).
+3. Return a new __List__ containing `P`.
 
 _BindingProperty : SingleNameBinding_
 
