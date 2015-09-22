@@ -29,8 +29,8 @@ _PropertyDefinition : `...` AssignmentExpression_
 ### Syntax ###
 
 ObjectAssignmentPattern:
-- `{` `...` IdentifierReference `}`
-- `{` AssignmentPropertyList `,` `...` IdentifierReference `}`
+- `{` `...` DestructuringAssignmentTarget `}`
+- `{` AssignmentPropertyList `,` `...` DestructuringAssignmentTarget `}`
 
 ObjectBindingPattern:
 - `{` `...` BindingIdentifier `}`
@@ -38,26 +38,36 @@ ObjectBindingPattern:
 
 ### Runtime Semantics: DestructuringAssignmentEvaluation ###
 
-_ObjectAssignmentPattern: `{` `...` IdentifierReference `}`_
+With parameter `value`.
+
+_ObjectAssignmentPattern: `{` `...` DestructuringAssignmentTarget `}`_
 
 1. Let `excludedNames` be a new empty __List__.
-2. Let `restObj` be ObjectCreate(%ObjectPrototype%).
-3. Let `assignStatus` be [CopyDataProperties(`restObj`, `obj`, `excludedNames`)](#copydataproperties-target-source-excluded).
-4. ReturnIfAbrupt(`assignStatus`).
-5. Let `P` be StringValue of IdentifierReference.
-6. Let `lref` be ResolveBinding(`P`).
-7. Return PutValue(`lref`,`restObj`).
-
-_ObjectAssignmentPattern: `{` AssignmentPropertyList `,` `...` IdentifierReference `}`_
-
-1. Let `excludedNames` be the result of performing RestObjectDestructuringAssignmentEvaluation for _AssignmentPropertyList_ using `obj` as the argument.
-2. ReturnIfAbrupt(`excludedNames`).
+2. If DestructuringAssignmentTarget is neither an ObjectLiteral nor an ArrayLiteral, then
+  1. Let `lref` be the result of evaluating DestructuringAssignmentTarget.
+  2. ReturnIfAbrupt(`lref`).
 3. Let `restObj` be ObjectCreate(%ObjectPrototype%).
 4. Let `assignStatus` be [CopyDataProperties(`restObj`, `obj`, `excludedNames`)](#copydataproperties-target-source-excluded).
 5. ReturnIfAbrupt(`assignStatus`).
-6. Let `P` be StringValue of IdentifierReference.
-7. Let `lref` be ResolveBinding(`P`).
-8. Return PutValue(`lref`,`restObj`).
+6. If DestructuringAssignmentTarget is neither an ObjectLiteral nor an ArrayLiteral, then
+  1. Return PutValue(`lref`, `restObj`).
+7. Let nestedAssignmentPattern be the parse of the source text corresponding to DestructuringAssignmentTarget using either AssignmentPattern or AssignmentPattern[Yield] as the goal symbol depending upon whether this AssignmentElement has the Yield parameter.
+8. Return the result of performing DestructuringAssignmentEvaluation of nestedAssignmentPattern with `restObj` as the argument.
+
+_ObjectAssignmentPattern: `{` AssignmentPropertyList `,` `...` DestructuringAssignmentTarget `}`_
+
+1. Let `excludedNames` be the result of performing RestObjectDestructuringAssignmentEvaluation for _AssignmentPropertyList_ using `obj` as the argument.
+2. ReturnIfAbrupt(`excludedNames`).
+3. If DestructuringAssignmentTarget is neither an ObjectLiteral nor an ArrayLiteral, then
+  1. Let `lref` be the result of evaluating DestructuringAssignmentTarget.
+  2. ReturnIfAbrupt(`lref`).
+4. Let `restObj` be ObjectCreate(%ObjectPrototype%).
+5. Let `assignStatus` be [CopyDataProperties(`restObj`, `obj`, `excludedNames`)](#copydataproperties-target-source-excluded).
+6. ReturnIfAbrupt(`assignStatus`).
+7. If DestructuringAssignmentTarget is neither an ObjectLiteral nor an ArrayLiteral, then
+  1. Return PutValue(`lref`, `restObj`).
+8. Let nestedAssignmentPattern be the parse of the source text corresponding to DestructuringAssignmentTarget using either AssignmentPattern or AssignmentPattern[Yield] as the goal symbol depending upon whether this AssignmentElement has the Yield parameter.
+9. Return the result of performing DestructuringAssignmentEvaluation of nestedAssignmentPattern with `restObj` as the argument.
 
 ### Runtime Semantics: RestObjectDestructuringAssignmentEvaluation
 
