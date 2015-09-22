@@ -101,7 +101,7 @@ _AssignmentProperty : IdentifierReference Initializer_
     3. If `hasNameProperty` is __false__, perform SetFunctionName(`v`, `P`).
 7. Let `status` be the result of evaluating PutValue(`lref`,`v`).
 8. ReturnIfAbrupt(`status`).
-9. Return a new __List__ containing 'P'.
+9. Return a new __List__ containing `P`.
 
 _AssignmentProperty : PropertyName `:` AssignmentElement_
 
@@ -109,7 +109,7 @@ _AssignmentProperty : PropertyName `:` AssignmentElement_
 2. ReturnIfAbrupt(`name`).
 3. Let `status` be the result of performing KeyedDestructuringAssignmentEvaluation of AssignmentElement with `value` and `name` as the arguments.
 4. ReturnIfAbrupt(`status`).
-5. Return a new __List__ containing 'name'.
+5. Return a new __List__ containing `name`.
 
 ### Runtime Semantics: BindingInitialization ###
 
