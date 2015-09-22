@@ -31,38 +31,10 @@ _PropertyDefinition : `...` AssignmentExpression_
 ObjectAssignmentPattern:
 - `{` `...` IdentifierReference `}`
 - `{` AssignmentPropertyList `,` `...` IdentifierReference `}`
-- etc.
 
 ObjectBindingPattern:
 - `{` `...` BindingIdentifier `}`
 - `{` BindingPropertyList `,` `...` BindingIdentifier `}`
-- etc.
-
-NOTE: This is explicitly disallowing nested object destructuring in the rest position. This is to avoid confusing syntax/semantics with regard to own vs. inherited properties.
-
-### Runtime Semantics: AssignmentPropertyNames ###
-
-TODO: This part of the spec text contains a bug since it needs to perform KeyedDestructuringAssignmentEvaluation for each of these property names.
-
-_AssignmentPropertyList : AssignmentProperty_
-
-1. Return AssignmentPropertyNames of _AssignmentProperty_.
-
-_AssignmentPropertyList : AssignmentPropertyList , AssignmentProperty_
-
-1. Let `names` be AssignmentPropertyNames of _AssignmentPropertyList_.
-2. Append to `names` the elements of the AssignmentPropertyNames of _AssignmentProperty_.
-3. Return `names`.
-
-_AssignmentProperty : IdentifierReference Initializer<sub>opt</sub>_
-
-1. Return a new __List__ containing _IdentifierReference_.
-
-_AssignmentProperty : PropertyName `:` AssignmentElement_
-
-1. Let `P` be the result of evaluating _PropertyName_
-2. ReturnIfAbrupt(`P`).
-3. Return a new __List__ containing `P`.
 
 ### Runtime Semantics: DestructuringAssignmentEvaluation ###
 
@@ -78,43 +50,56 @@ _ObjectAssignmentPattern: `{` `...` IdentifierReference `}`_
 
 _ObjectAssignmentPattern: `{` AssignmentPropertyList `,` `...` IdentifierReference `}`_
 
-1. Let `excludedNames` be AssignmentPropertyNames of _AssignmentPropertyList_.
-2. Let `status` be the result of performing DestructuringAssignmentEvaluation for _AssignmentPropertyList_ using `obj` as the argument.
-3. ReturnIfAbrupt(`status`).
-4. Let `restObj` be ObjectCreate(%ObjectPrototype%).
-5. Let `assignStatus` be [CopyDataProperties(`restObj`, `obj`, `excludedNames`)](#copydataproperties-target-source-excluded).
-6. ReturnIfAbrupt(`assignStatus`).
-7. Let `P` be StringValue of IdentifierReference.
-8. Let `lref` be ResolveBinding(`P`).
-9. Return PutValue(`lref`,`restObj`).
+1. Let `excludedNames` be the result of performing RestObjectDestructuringAssignmentEvaluation for _AssignmentPropertyList_ using `obj` as the argument.
+2. ReturnIfAbrupt(`excludedNames`).
+3. Let `restObj` be ObjectCreate(%ObjectPrototype%).
+4. Let `assignStatus` be [CopyDataProperties(`restObj`, `obj`, `excludedNames`)](#copydataproperties-target-source-excluded).
+5. ReturnIfAbrupt(`assignStatus`).
+6. Let `P` be StringValue of IdentifierReference.
+7. Let `lref` be ResolveBinding(`P`).
+8. Return PutValue(`lref`,`restObj`).
 
-### Runtime Semantics: BindingPropertyNames ###
+### Runtime Semantics: RestObjectDestructuringAssignmentEvaluation
 
-TODO: This part of the spec text contains a bug since it needs to perform BindingInitialization for each of these property names.
+With parameter `value`.
 
-_BindingPropertyList : BindingProperty_
+NOTE: This is the same as the ES2015 DestructuringAssignmentEvaluation except it collects a list of all destructured property names.
 
-1. Return BindingPropertyNames of _BindingProperty_.
+_AssignmentPropertyList : AssignmentPropertyList `,` AssignmentProperty_
 
-_BindingPropertyList : BindingPropertyList , BindingProperty_
+1. Let `propertyNames` be the result of performing RestObjectDestructuringAssignmentEvaluation for AssignmentPropertyList using value as the argument.
+2. ReturnIfAbrupt(status).
+3. Let `nextNames` be the result of performing RestObjectDestructuringAssignmentEvaluation for AssignmentProperty using `value` as the argument.
+4. ReturnIfAbrupt(`nextNames`).
+5. Append each item in `nextNames` to the end of `propertyNames`.
+6. Return `propertyNames`.
 
-1. Let `names` be BindingPropertyNames of _BindingPropertyList_.
-2. Append to `names` the elements of the BindingPropertyNames of _BindingProperty_.
-3. Return `names`.
+_AssignmentProperty : IdentifierReference Initializer_
 
-_BindingProperty : PropertyName `:` BindingElement_
+1. Let `P` be StringValue of _IdentifierReference_.
+2. Let `lref` be ResolveBinding(P).
+3. ReturnIfAbrupt(`P`).
+4. Let `v` be GetV(`value`, `P`).
+5. ReturnIfAbrupt(`v`).
+6. If _Initializer_ is present and `v` is __undefined__, then
+  1. Let `defaultValue` be the result of evaluating _Initializer_.
+  2. Let `v` be GetValue(`defaultValue`).
+  3. ReturnIfAbrupt(`v`).
+  4. If IsAnonymousFunctionDefinition(_Initializer_) is __true__, then
+    1. Let `hasNameProperty` be HasOwnProperty(`v`, "name").
+    2. ReturnIfAbrupt(`hasNameProperty`).
+    3. If `hasNameProperty` is __false__, perform SetFunctionName(`v`, `P`).
+7. Let `status` be the result of evaluating PutValue(`lref`,`v`).
+8. ReturnIfAbrupt(`status`).
+9. Return a new __List__ containing 'P'.
 
-1. Let `P` be the result of evaluating _PropertyName_
-2. ReturnIfAbrupt(`P`).
-3. Return a new __List__ containing `P`.
+_AssignmentProperty : PropertyName `:` AssignmentElement_
 
-_BindingProperty : SingleNameBinding_
-
-1. Return BindingPropertyNames of _SingleNameBinding_.
-
-_SingleNameBinding : BindingIdentifier Initializer<sub>opt</sub>_
-
-1. Return a new __List__ containing _BindingIdentifier_.
+1. Let `name` be the result of evaluating PropertyName.
+2. ReturnIfAbrupt(`name`).
+3. Let `status` be the result of performing KeyedDestructuringAssignmentEvaluation of AssignmentElement with `value` and `name` as the arguments.
+4. ReturnIfAbrupt(`status`).
+5. Return a new __List__ containing 'name'.
 
 ### Runtime Semantics: BindingInitialization ###
 
@@ -126,17 +111,54 @@ _ObjectBindingPattern : `{` `...` BindingIdentifier `}`_
 2. Let `restObj` be ObjectCreate(%ObjectPrototype%).
 3. Let `assignStatus` be [CopyDataProperties(`restObj`, `value`, `excludedNames`)](#copydataproperties-target-source-excluded).
 4. ReturnIfAbrupt(`assignStatus`).
-5. Return the result of performing BindingInitialization for _BindingIdentifier_ using `restObj` and `environment` as arguments.
+5. Let `bindingId` be StringValue of BindingIdentifier.
+6. Let `lhs` be ResolveBinding(`bindingId`, `environment`).
+7. ReturnIfAbrupt(`lhs`).
+8. If `environment` is __undefined__, return PutValue(`lhs`, `restObj`).
+9. Return InitializeReferencedBinding(`lhs`, `restObj`).
 
 _ObjectBindingPattern : `{` BindingPropertyList `,` `...` BindingIdentifier `}`_
 
-1. Let `excludedNames` be BindingPropertyNames of _BindingPropertyList_.
-2. Let `status` be the result of performing BindingInitialization for _BindingPropertyList_ using `value` and `environment` as arguments.
+1. Let `excludedNames` be the result of performing RestObjectBindingInitialization of _BindingPropertyList_ using `value` and `environment` as arguments.
+2. ReturnIfAbrupt(`excludedNames`).
+3. Let `restObj` be ObjectCreate(%ObjectPrototype%).
+4. Let `assignStatus` be [CopyDataProperties(`restObj`, `value`, `excludedNames`)](#copydataproperties-target-source-excluded).
+5. ReturnIfAbrupt(`assignStatus`).
+6. Let `bindingId` be StringValue of BindingIdentifier.
+7. Let `lhs` be ResolveBinding(`bindingId`, `environment`).
+8. ReturnIfAbrupt(`lhs`).
+9. If `environment` is __undefined__, return PutValue(`lhs`, `restObj`).
+10. Return InitializeReferencedBinding(`lhs`, `restObj`).
+
+### Runtime Semantics: RestObjectBindingInitialization
+
+With parameters `value` and `environment`.
+
+NOTE: This is the same as the ES2015 BindingInitialization except it collects a list of all bound property names.
+
+_BindingPropertyList : BindingPropertyList `,` BindingProperty_
+
+1. Let `boundNames` be the result of performing RestObjectBindingInitialization for BindingPropertyList using `value` and `environment` as arguments.
+2. ReturnIfAbrupt(`boundNames`).
+3. Let `nextNames` be the result of performing RestObjectBindingInitialization for BindingProperty using value and environment as arguments.
+4. ReturnIfAbrupt(`nextNames`).
+5. Append each item in `nextNames` to the end of `boundNames`.
+6. Return `boundNames`.
+
+_BindingProperty : SingleNameBinding_
+
+1. Let `name` be the string that is the only element of BoundNames of SingleNameBinding.
+2. Let `status` be the result of performing KeyedBindingInitialization for SingleNameBinding using `value`, `environment`, and `name` as the arguments.
 3. ReturnIfAbrupt(`status`).
-4. Let `restObj` be ObjectCreate(%ObjectPrototype%).
-5. Let `assignStatus` be [CopyDataProperties(`restObj`, `value`, `excludedNames`)](#copydataproperties-target-source-excluded).
-6. ReturnIfAbrupt(`assignStatus`).
-7. Return the result of performing BindingInitialization for _BindingIdentifier_ using `restObj` and `environment` as arguments.
+4. Return a new __List__ containing 'name'.
+
+_BindingProperty : PropertyName `:` BindingElement_
+
+1. Let `P` be the result of evaluating PropertyName
+2. ReturnIfAbrupt(`P`).
+3. Let `status` be the result of performing KeyedBindingInitialization for BindingElement using `value`, `environment`, and `P` as arguments.
+4. ReturnIfAbrupt(`status`).
+5. Return a new __List__ containing `P`.
 
 ## CopyDataProperties (target, source, excluded) ##
 
