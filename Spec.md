@@ -20,7 +20,7 @@ _PropertyDefinition : `...` AssignmentExpression_
 
 1. Let `exprValue` be the result of evaluating _AssignmentExpression_.
 2. Let `fromValue` be GetValue(`exprValue`).
-3. If `fromValue` is either __undefined__ or __null__, then return __true__.
+3. ReturnIfAbrupt(`fromValue`).
 4. Let `excludedNames` be a new empty __List__.
 5. Return [CopyDataProperties(`object`, `fromValue`, `excludedNames`)](#copydataproperties-target-source-excluded).
 
