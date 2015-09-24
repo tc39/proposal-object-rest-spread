@@ -56,7 +56,7 @@ _ObjectAssignmentPattern: `{` `...` DestructuringAssignmentTarget `}`_
 
 _ObjectAssignmentPattern: `{` AssignmentPropertyList `,` `...` DestructuringAssignmentTarget `}`_
 
-1. Let `excludedNames` be the result of performing RestObjectDestructuringAssignmentEvaluation for _AssignmentPropertyList_ using `value` as the argument.
+1. Let `excludedNames` be the result of performing DestructuringAssignmentEvaluation for _AssignmentPropertyList_ using `value` as the argument.
 2. ReturnIfAbrupt(`excludedNames`).
 3. If DestructuringAssignmentTarget is neither an ObjectLiteral nor an ArrayLiteral, then
   1. Let `lref` be the result of evaluating DestructuringAssignmentTarget.
@@ -69,17 +69,13 @@ _ObjectAssignmentPattern: `{` AssignmentPropertyList `,` `...` DestructuringAssi
 8. Let nestedAssignmentPattern be the parse of the source text corresponding to DestructuringAssignmentTarget using either AssignmentPattern or AssignmentPattern[Yield] as the goal symbol depending upon whether this AssignmentElement has the Yield parameter.
 9. Return the result of performing DestructuringAssignmentEvaluation of nestedAssignmentPattern with `restObj` as the argument.
 
-### Runtime Semantics: RestObjectDestructuringAssignmentEvaluation
-
-With parameter `value`.
-
-NOTE: This is the same as the ES2015 DestructuringAssignmentEvaluation except it collects a list of all destructured property names.
+NOTE: The following are the same as the ES2015 DestructuringAssignmentEvaluation except it collects a list of all destructured property names rather than just empty completion.
 
 _AssignmentPropertyList : AssignmentPropertyList `,` AssignmentProperty_
 
-1. Let `propertyNames` be the result of performing RestObjectDestructuringAssignmentEvaluation for AssignmentPropertyList using value as the argument.
+1. Let `propertyNames` be the result of performing DestructuringAssignmentEvaluation for AssignmentPropertyList using value as the argument.
 2. ReturnIfAbrupt(status).
-3. Let `nextNames` be the result of performing RestObjectDestructuringAssignmentEvaluation for AssignmentProperty using `value` as the argument.
+3. Let `nextNames` be the result of performing DestructuringAssignmentEvaluation for AssignmentProperty using `value` as the argument.
 4. ReturnIfAbrupt(`nextNames`).
 5. Append each item in `nextNames` to the end of `propertyNames`.
 6. Return `propertyNames`.
@@ -129,7 +125,7 @@ _ObjectBindingPattern : `{` `...` BindingIdentifier `}`_
 
 _ObjectBindingPattern : `{` BindingPropertyList `,` `...` BindingIdentifier `}`_
 
-1. Let `excludedNames` be the result of performing RestObjectBindingInitialization of _BindingPropertyList_ using `value` and `environment` as arguments.
+1. Let `excludedNames` be the result of performing BindingInitialization of _BindingPropertyList_ using `value` and `environment` as arguments.
 2. ReturnIfAbrupt(`excludedNames`).
 3. Let `restObj` be ObjectCreate(%ObjectPrototype%).
 4. Let `assignStatus` be [CopyDataProperties(`restObj`, `value`, `excludedNames`)](#copydataproperties-target-source-excluded).
@@ -140,17 +136,13 @@ _ObjectBindingPattern : `{` BindingPropertyList `,` `...` BindingIdentifier `}`_
 9. If `environment` is __undefined__, return PutValue(`lhs`, `restObj`).
 10. Return InitializeReferencedBinding(`lhs`, `restObj`).
 
-### Runtime Semantics: RestObjectBindingInitialization
-
-With parameters `value` and `environment`.
-
-NOTE: This is the same as the ES2015 BindingInitialization except it collects a list of all bound property names.
+NOTE: The following are the same as the ES2015 BindingInitialization except it collects a list of all bound property names rather than just empty completion.
 
 _BindingPropertyList : BindingPropertyList `,` BindingProperty_
 
-1. Let `boundNames` be the result of performing RestObjectBindingInitialization for BindingPropertyList using `value` and `environment` as arguments.
+1. Let `boundNames` be the result of performing BindingInitialization for BindingPropertyList using `value` and `environment` as arguments.
 2. ReturnIfAbrupt(`boundNames`).
-3. Let `nextNames` be the result of performing RestObjectBindingInitialization for BindingProperty using value and environment as arguments.
+3. Let `nextNames` be the result of performing BindingInitialization for BindingProperty using value and environment as arguments.
 4. ReturnIfAbrupt(`nextNames`).
 5. Append each item in `nextNames` to the end of `boundNames`.
 6. Return `boundNames`.
