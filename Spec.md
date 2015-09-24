@@ -47,7 +47,7 @@ _ObjectAssignmentPattern: `{` `...` DestructuringAssignmentTarget `}`_
   1. Let `lref` be the result of evaluating DestructuringAssignmentTarget.
   2. ReturnIfAbrupt(`lref`).
 3. Let `restObj` be ObjectCreate(%ObjectPrototype%).
-4. Let `assignStatus` be [CopyDataProperties(`restObj`, `obj`, `excludedNames`)](#copydataproperties-target-source-excluded).
+4. Let `assignStatus` be [CopyDataProperties(`restObj`, `value`, `excludedNames`)](#copydataproperties-target-source-excluded).
 5. ReturnIfAbrupt(`assignStatus`).
 6. If DestructuringAssignmentTarget is neither an ObjectLiteral nor an ArrayLiteral, then
   1. Return PutValue(`lref`, `restObj`).
@@ -56,13 +56,13 @@ _ObjectAssignmentPattern: `{` `...` DestructuringAssignmentTarget `}`_
 
 _ObjectAssignmentPattern: `{` AssignmentPropertyList `,` `...` DestructuringAssignmentTarget `}`_
 
-1. Let `excludedNames` be the result of performing RestObjectDestructuringAssignmentEvaluation for _AssignmentPropertyList_ using `obj` as the argument.
+1. Let `excludedNames` be the result of performing RestObjectDestructuringAssignmentEvaluation for _AssignmentPropertyList_ using `value` as the argument.
 2. ReturnIfAbrupt(`excludedNames`).
 3. If DestructuringAssignmentTarget is neither an ObjectLiteral nor an ArrayLiteral, then
   1. Let `lref` be the result of evaluating DestructuringAssignmentTarget.
   2. ReturnIfAbrupt(`lref`).
 4. Let `restObj` be ObjectCreate(%ObjectPrototype%).
-5. Let `assignStatus` be [CopyDataProperties(`restObj`, `obj`, `excludedNames`)](#copydataproperties-target-source-excluded).
+5. Let `assignStatus` be [CopyDataProperties(`restObj`, `value`, `excludedNames`)](#copydataproperties-target-source-excluded).
 6. ReturnIfAbrupt(`assignStatus`).
 7. If DestructuringAssignmentTarget is neither an ObjectLiteral nor an ArrayLiteral, then
   1. Return PutValue(`lref`, `restObj`).
