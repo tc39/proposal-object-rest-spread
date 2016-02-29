@@ -35,6 +35,7 @@ ObjectAssignmentPattern:
 ObjectBindingPattern:
 - `{` `...` BindingIdentifier `}`
 - `{` BindingPropertyList `,` `...` BindingIdentifier `}`
+- `{` BindingPropertyList `,` `...` BindingPattern `}`
 
 ### Runtime Semantics: DestructuringAssignmentEvaluation ###
 
@@ -110,6 +111,8 @@ _AssignmentProperty : PropertyName `:` AssignmentElement_
 ### Runtime Semantics: BindingInitialization ###
 
 With parameters `value` and `environment`.
+
+TODO: explain runtime semantics for `...` BindingPattern.
 
 _ObjectBindingPattern : `{` `...` BindingIdentifier `}`_
 
