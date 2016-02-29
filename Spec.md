@@ -34,6 +34,7 @@ ObjectAssignmentPattern:
 
 ObjectBindingPattern:
 - `{` `...` BindingIdentifier `}`
+- `{` `...` BindingPattern `}`
 - `{` BindingPropertyList `,` `...` BindingIdentifier `}`
 - `{` BindingPropertyList `,` `...` BindingPattern `}`
 
