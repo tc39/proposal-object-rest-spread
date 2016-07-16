@@ -67,26 +67,29 @@ contributors: Sebastian Markbåge
   <h2>Syntax</h2>
 
   <emu-production name="ObjectAssignmentPattern" params="Yield">
-    <emu-rhs><emu-t>{</emu-t><emu-t>}</emu-t></emu-rhs>
+    <emu-rhs><emu-t>{</emu-t><ins><emu-nt params="?Yield" optional>AssignmentRestProperty</emu-nt></ins><emu-t>}</emu-t></emu-rhs>
     <emu-rhs><emu-t>{</emu-t><emu-nt params="?Yield">AssignmentPropertyList</emu-nt><emu-t>}</emu-t></emu-rhs>
-    <emu-rhs><emu-t>{</emu-t><emu-nt params="?Yield">AssignmentPropertyList</emu-nt><emu-t>,</emu-t><emu-t>}</emu-t></emu-rhs>
-    <ins class="block">
-      <emu-rhs><emu-t>{</emu-t><emu-t>...</emu-t><emu-nt params="?Yield">DestructuringAssignmentTarget</emu-nt><emu-t>}</emu-t></emu-rhs>
-      <emu-rhs><emu-t>{</emu-t><emu-nt params="?Yield">AssignmentPropertyList</emu-nt><emu-t>,</emu-t><emu-t>...</emu-t><emu-nt params="?Yield">DestructuringAssignmentTarget</emu-nt><emu-t>}</emu-t></emu-rhs>
-    </ins>
+    <emu-rhs><emu-t>{</emu-t><emu-nt params="?Yield">AssignmentPropertyList</emu-nt><emu-t>,</emu-t><ins><emu-nt params="?Yield" optional>AssignmentRestProperty</emu-nt></ins><emu-t>}</emu-t></emu-rhs>
   </emu-production>
 
+  <ins class="block">
+    <emu-production name="AssignmentRestProperty" params="Yield">
+      <emu-rhs><emu-t>...</emu-t><emu-nt params="?Yield">DestructuringAssignmentTarget</emu-nt></emu-rhs>
+    </emu-production>
+  </ins>
+
   <emu-production name="ObjectBindingPattern" params="Yield">
-    <emu-rhs><emu-t>{</emu-t><emu-t>}</emu-t></emu-rhs>
+    <emu-rhs><emu-t>{</emu-t><ins><emu-nt params="?Yield" optional>BindingRestProperty</emu-nt></ins><emu-t>}</emu-t></emu-rhs>
     <emu-rhs><emu-t>{</emu-t><emu-nt params="?Yield">BindingPropertyList</emu-nt><emu-t>}</emu-t></emu-rhs>
-    <emu-rhs><emu-t>{</emu-t><emu-nt params="?Yield">BindingPropertyList</emu-nt><emu-t>,</emu-t><emu-t>}</emu-t></emu-rhs>
-    <ins class="block">
-      <emu-rhs><emu-t>{</emu-t><emu-t>...</emu-t><emu-nt params="?Yield">BindingIdentifier</emu-nt><emu-t>}</emu-t></emu-rhs>
-      <emu-rhs><emu-t>{</emu-t><emu-t>...</emu-t><emu-nt params="?Yield">BindingPattern</emu-nt><emu-t>}</emu-t></emu-rhs>
-      <emu-rhs><emu-t>{</emu-t><emu-nt params="?Yield">BindingPropertyList</emu-nt><emu-t>,</emu-t><emu-t>...</emu-t><emu-nt params="?Yield">BindingIdentifier</emu-nt><emu-t>}</emu-t></emu-rhs>
-      <emu-rhs><emu-t>{</emu-t><emu-nt params="?Yield">BindingPropertyList</emu-nt><emu-t>,</emu-t><emu-t>...</emu-t><emu-nt params="?Yield">BindingPattern</emu-nt><emu-t>}</emu-t></emu-rhs>
-    </ins>
+    <emu-rhs><emu-t>{</emu-t><emu-nt params="?Yield">BindingPropertyList</emu-nt><emu-t>,</emu-t><ins><emu-nt params="?Yield" optional>BindingRestProperty</emu-nt></ins><emu-t>}</emu-t></emu-rhs>
   </emu-production>
+
+  <ins class="block">
+    <emu-production name="BindingRestProperty" params="Yield">
+      <emu-rhs><emu-t>...</emu-t><emu-nt params="?Yield">BindingIdentifier</emu-nt></emu-rhs>
+      <emu-rhs><emu-t>...</emu-t><emu-nt params="?Yield">BindingPattern</emu-nt></emu-rhs>
+    </emu-production>
+  </ins>
 
   <emu-clause id="Rest-RuntimeSemantics-DestructuringAssignmentEvaluation">
     <h1>Runtime Semantics: DestructuringAssignmentEvaluation</h1>
