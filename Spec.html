@@ -93,78 +93,107 @@ contributors: Sebastian Markbåge
 
   <emu-clause id="Rest-RuntimeSemantics-DestructuringAssignmentEvaluation">
     <h1>Runtime Semantics: DestructuringAssignmentEvaluation</h1>
-
     <p>With parameter _value_.</p>
 
+    <emu-grammar>
+      ObjectAssignmentPattern :
+        `{` AssignmentPropertyList `}`
+        `{` AssignmentPropertyList `,` `}`
+    </emu-grammar>
+    <emu-alg>
+      1. Perform ? RequireObjectCoercible(_value_).
+      1. <ins>Let _excludedNames_ be</ins> the result of performing <ins>Property</ins>DestructuringAssignmentEvaluation for |AssignmentPropertyList| using _value_ as the argument.
+      1. <ins>ReturnIfAbrupt(_excludedNames_).</ins>
+      1. <ins>Return NormalCompletion(~empty~).</ins>
+    </emu-alg>
+
     <ins class="block">
-      <emu-grammar>ObjectAssignmentPattern : `{` `...` DestructuringAssignmentTarget `}`</emu-grammar>
+      <emu-grammar>ObjectAssignmentPattern : `{` AssignmentRestProperty `}`</emu-grammar>
       <emu-alg>
         1. Let _excludedNames_ be a new empty List.
-        1. If |DestructuringAssignmentTarget| is neither an |ObjectLiteral| nor an |ArrayLiteral|, then
-          1. Let _lref_ be the result of evaluating |DestructuringAssignmentTarget|.
-          1. ReturnIfAbrupt(_lref_).
-        1. Let _restObj_ be ObjectCreate(%ObjectPrototype%).
-        1. Let _assignStatus_ be CopyDataProperties(_restObj_, _value_, _excludedNames_).
-        1. ReturnIfAbrupt(_assignStatus_).
-        1. If |DestructuringAssignmentTarget| is neither an |ObjectLiteral| nor an |ArrayLiteral|, then
-          1. Return PutValue(_lref_, _restObj_).
-        1. Let _nestedAssignmentPattern_ be the parse of the source text corresponding to |DestructuringAssignmentTarget| using either |AssignmentPattern| or |AssignmentPattern[Yield]| as the goal symbol depending upon whether this |AssignmentElement| has the <sub>[Yield]</sub> parameter.
-        1. Return the result of performing DestructuringAssignmentEvaluation of _nestedAssignmentPattern_ with _restObj_ as the argument.
+        1. Return the result of performing RestDestructuringAssignmentEvaluation of _AssignmentRestProperty_ with _value_ and _excludedNames_ as the arguments.
       </emu-alg>
 
-      <emu-grammar>ObjectAssignmentPattern : `{` AssignmentPropertyList `,` `...` DestructuringAssignmentTarget `}`</emu-grammar>
+      <emu-grammar>ObjectAssignmentPattern : `{` AssignmentPropertyList `,` AssignmentRestProperty `}`</emu-grammar>
       <emu-alg>
-        1. Let _excludedNames_ be the result of performing DestructuringAssignmentEvaluation for _AssignmentPropertyList_ using _value_ as the argument.
+        1. Let _excludedNames_ be the result of performing PropertyDestructuringAssignmentEvaluation for _AssignmentPropertyList_ using _value_ as the argument.
         1. ReturnIfAbrupt(_excludedNames_).
-        1. If |DestructuringAssignmentTarget| is neither an |ObjectLiteral| nor an |ArrayLiteral|, then
-          1. Let _lref_ be the result of evaluating |DestructuringAssignmentTarget|.
-          1. ReturnIfAbrupt(_lref_).
-        1. Let _restObj_ be ObjectCreate(%ObjectPrototype%).
-        1. Let _assignStatus_ be CopyDataProperties(_restObj_, _value_, _excludedNames_).
-        1. ReturnIfAbrupt(_assignStatus_).
-        1. If |DestructuringAssignmentTarget| is neither an |ObjectLiteral| nor an |ArrayLiteral|, then
-          1. Return PutValue(_lref_, _restObj_).
-        1. Let _nestedAssignmentPattern_ be the parse of the source text corresponding to |DestructuringAssignmentTarget| using either |AssignmentPattern| or |AssignmentPattern[Yield]| as the goal symbol depending upon whether this |AssignmentElement| has the <sub>[Yield]</sub> parameter.
-        1. Return the result of performing DestructuringAssignmentEvaluation of _nestedAssignmentPattern_ with _restObj_ as the argument.
+        1. Return the result of performing RestDestructuringAssignmentEvaluation of _AssignmentRestProperty_ with _value_ and _excludedNames_ as the arguments.
       </emu-alg>
     </ins>
 
-    <emu-note>The following are the same as the ES2015 DestructuringAssignmentEvaluation except it collects a list of all destructured property names rather than just empty completion.</emu-note>
+    <emu-note>The following productions have moved to PropertyDestructuringAssignmentEvaluation to keep the return type of DestructuringAssignmentEvaluation consistent.</emu-note>
 
-    <emu-grammar>AssignmentPropertyList : AssignmentPropertyList `,` AssignmentProperty</emu-grammar>
-    <emu-alg>
-      1. Let <del>_status_</del> <ins>_propertyNames_</ins> be the result of performing DestructuringAssignmentEvaluation for |AssignmentPropertyList| using _value_ as the argument.
-      1. ReturnIfAbrupt(<del>_status_</del> <ins>_propertyNames_</ins>).
-      1. <del>Return</del> <ins>Let _nextNames_ be</ins> the result of performing DestructuringAssignmentEvaluation for |AssignmentProperty| using _value_ as the argument.
-      1. <ins>ReturnIfAbrupt(_nextNames_).</ins>
-      1. <ins>Append each item in _nextNames_ to the end of _propertyNames_.</ins>
-      1. <ins>Return _propertyNames_.</ins>
-    </emu-alg>
-
-    <emu-grammar>AssignmentProperty : IdentifierReference Initializer?</emu-grammar>
-    <emu-alg>
-      1. Let _P_ be StringValue of |IdentifierReference|.
-      1. Let _lref_ be ? ResolveBinding(_P_).
-      1. Let _v_ be ? GetV(_value_, _P_).
-      1. If |Initializer_opt| is present and _v_ is *undefined*, then
-        1. Let _defaultValue_ be the result of evaluating |Initializer|.
-        1. Let _v_ be ? GetValue(_defaultValue_).
-        1. If IsAnonymousFunctionDefinition(|Initializer|) is *true*, then
-          1. Let _hasNameProperty_ be ? HasOwnProperty(_v_, `"name"`).
-          1. If _hasNameProperty_ is *false*, perform SetFunctionName(_v_, _P_).
-      1. <del>Return</del> <ins>Perform</ins> ? PutValue(_lref_, _v_).
-      1. <ins>Return a new List containing _P_.</ins>
-    </emu-alg>
-
-    <emu-grammar>AssignmentProperty : PropertyName `:` AssignmentElement</emu-grammar>
-    <emu-alg>
-      1. Let _name_ be the result of evaluating |PropertyName|.
-      1. ReturnIfAbrupt(_name_).
-      1. <del>Return</del> <ins>Let _status_ be</ins> the result of performing KeyedDestructuringAssignmentEvaluation of |AssignmentElement| with _value_ and _name_ as the arguments.
-      1. <ins>ReturnIfAbrupt(_status_).</ins>
-      1. <ins>Return a new List containing _name_.</ins>
-    </emu-alg>
+    <del class="block">
+      <emu-grammar>AssignmentPropertyList : AssignmentPropertyList `,` AssignmentProperty</emu-grammar>
+      <emu-grammar>AssignmentProperty : IdentifierReference Initializer?</emu-grammar>
+      <emu-grammar>AssignmentProperty : PropertyName `:` AssignmentElement</emu-grammar>
+    </del>
   </emu-clause>
+
+  <ins class="block">
+    <emu-clause id="Rest-RuntimeSemantics-PropertyDestructuringAssignmentEvaluation">
+      <h1>Runtime Semantics: PropertyDestructuringAssignmentEvaluation</h1>
+      <p>With parameters _value_.</p>
+
+      <emu-note>These collect a list of all destructured property names rather than just empty completion.</emu-note>
+
+      <emu-grammar>AssignmentPropertyList : AssignmentPropertyList `,` AssignmentProperty</emu-grammar>
+      <emu-alg>
+        1. Let <del>_status_</del> <ins>_propertyNames_</ins> be the result of performing DestructuringAssignmentEvaluation for |AssignmentPropertyList| using _value_ as the argument.
+        1. ReturnIfAbrupt(<del>_status_</del> <ins>_propertyNames_</ins>).
+        1. <del>Return</del> <ins>Let _nextNames_ be</ins> the result of performing DestructuringAssignmentEvaluation for |AssignmentProperty| using _value_ as the argument.
+        1. <ins>ReturnIfAbrupt(_nextNames_).</ins>
+        1. <ins>Append each item in _nextNames_ to the end of _propertyNames_.</ins>
+        1. <ins>Return _propertyNames_.</ins>
+      </emu-alg>
+
+      <emu-grammar>AssignmentProperty : IdentifierReference Initializer?</emu-grammar>
+      <emu-alg>
+        1. Let _P_ be StringValue of |IdentifierReference|.
+        1. Let _lref_ be ? ResolveBinding(_P_).
+        1. Let _v_ be ? GetV(_value_, _P_).
+        1. If |Initializer_opt| is present and _v_ is *undefined*, then
+          1. Let _defaultValue_ be the result of evaluating |Initializer|.
+          1. Let _v_ be ? GetValue(_defaultValue_).
+          1. If IsAnonymousFunctionDefinition(|Initializer|) is *true*, then
+            1. Let _hasNameProperty_ be ? HasOwnProperty(_v_, `"name"`).
+            1. If _hasNameProperty_ is *false*, perform SetFunctionName(_v_, _P_).
+        1. <del>Return</del> <ins>Perform</ins> ? PutValue(_lref_, _v_).
+        1. <ins>Return a new List containing _P_.</ins>
+      </emu-alg>
+
+      <emu-grammar>AssignmentProperty : PropertyName `:` AssignmentElement</emu-grammar>
+      <emu-alg>
+        1. Let _name_ be the result of evaluating |PropertyName|.
+        1. ReturnIfAbrupt(_name_).
+        1. <del>Return</del> <ins>Let _status_ be</ins> the result of performing KeyedDestructuringAssignmentEvaluation of |AssignmentElement| with _value_ and _name_ as the arguments.
+        1. <ins>ReturnIfAbrupt(_status_).</ins>
+        1. <ins>Return a new List containing _name_.</ins>
+      </emu-alg>
+    </emu-clause>
+  </ins>
+
+  <ins class="block">
+    <emu-clause id="Rest-RuntimeSemantics-RestDestructuringAssignmentEvaluation">
+      <h1>Runtime Semantics: RestDestructuringAssignmentEvaluation</h1>
+      <p>With parameters _value_ and _excludedNames_.</p>
+
+      <emu-grammar>AssignmentRestProperty[Yield] : `...` DestructuringAssignmentTarget</emu-grammar>
+      <emu-alg>
+        1. If |DestructuringAssignmentTarget| is neither an |ObjectLiteral| nor an |ArrayLiteral|, then
+          1. Let _lref_ be the result of evaluating |DestructuringAssignmentTarget|.
+          1. ReturnIfAbrupt(_lref_).
+        1. Let _restObj_ be ObjectCreate(%ObjectPrototype%).
+        1. Let _assignStatus_ be CopyDataProperties(_restObj_, _value_, _excludedNames_).
+        1. ReturnIfAbrupt(_assignStatus_).
+        1. If |DestructuringAssignmentTarget| is neither an |ObjectLiteral| nor an |ArrayLiteral|, then
+          1. Return PutValue(_lref_, _restObj_).
+        1. Let _nestedAssignmentPattern_ be the parse of the source text corresponding to |DestructuringAssignmentTarget| using either |AssignmentPattern| or |AssignmentPattern[Yield]| as the goal symbol depending upon whether this |AssignmentElement| has the <sub>[Yield]</sub> parameter.
+        1. Return the result of performing DestructuringAssignmentEvaluation of _nestedAssignmentPattern_ with _restObj_ as the argument.
+      </emu-alg>
+    </emu-clause>
+  </ins>
 
   <emu-clause id="Rest-RuntimeSemantics-BindingInitialization">
     <h1>Runtime Semantics: BindingInitialization</h1>
