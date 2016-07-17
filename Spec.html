@@ -197,67 +197,105 @@ contributors: Sebastian Markbåge
 
   <emu-clause id="Rest-RuntimeSemantics-BindingInitialization">
     <h1>Runtime Semantics: BindingInitialization</h1>
-
     <p>With parameters _value_ and _environment_.</p>
 
     <ins class="block">
-      <emu-grammar>ObjectBindingPattern : `{` `...` BindingIdentifier `}`</emu-grammar>
+      <emu-grammar>
+        ObjectBindingPattern :
+          `{` BindingPropertyList `}`
+          `{` BindingPropertyList `,` `}`
+      </emu-grammar>
       <emu-alg>
-        1. Let _excludedNames_ be a new empty List.
-        1. Let _restObj_ be ObjectCreate(%ObjectPrototype%).
-        1. Let _assignStatus_ be CopyDataProperties(_restObj_, _value_, _excludedNames_).
-        1. ReturnIfAbrupt(_assignStatus_).
-        1. Let _bindingId_ be StringValue of |BindingIdentifier|.
-        1. Let _lhs_ be ResolveBinding(_bindingId_, _environment_).
-        1. ReturnIfAbrupt(_lhs_).
-        1. If _environment_ is *undefined*, return PutValue(_lhs_, _restObj_).
-        1. Return InitializeReferencedBinding(_lhs_, _restObj_).
+        1. Let _excludedNames_ be the result of performing PropertyBindingInitialization for |BindingPropertyList| using _value_ and _environment_ as the argument.
+        1. ReturnIfAbrupt(_excludedNames_).
+        1. Return NormalCompletion(~empty~).
       </emu-alg>
 
-      <emu-grammar>ObjectBindingPattern : `{` BindingPropertyList `,` `...` BindingIdentifier `}`</emu-grammar>
+      <emu-grammar>ObjectBindingPattern : `{` BindingRestProperty `}`</emu-grammar>
       <emu-alg>
-        1. Let _excludedNames_ be the result of performing BindingInitialization of |BindingPropertyList| using _value_ and _environment_ as arguments.
+        1. Let _excludedNames_ be a new empty List.
+        1. Return the result of performing RestBindingInitialization of _BindingRestProperty_ with _value_, _environment_ and _excludedNames_ as the arguments.
+      </emu-alg>
+
+      <emu-grammar>ObjectBindingPattern : `{` BindingPropertyList `,` BindingRestProperty `}`</emu-grammar>
+      <emu-alg>
+        1. Let _excludedNames_ be the result of performing PropertyBindingInitialization of |BindingPropertyList| using _value_ and _environment_ as arguments.
         1. ReturnIfAbrupt(_excludedNames_).
-        1. Let _restObj_ be ObjectCreate(%ObjectPrototype%).
-        1. Let _assignStatus_ be CopyDataProperties(_restObj_, _value_, _excludedNames_).
-        1. ReturnIfAbrupt(_assignStatus_).
-        1. Let _bindingId_ be StringValue of |BindingIdentifier|.
-        1. Let _lhs_ be ResolveBinding(_bindingId_, _environment_).
-        1. ReturnIfAbrupt(_lhs_).
-        1. If _environment_ is *undefined*, return PutValue(_lhs_, _restObj_).
-        1. Return InitializeReferencedBinding(_lhs_, _restObj_).
+        1. Return the result of performing RestBindingInitialization of _BindingRestProperty_ with _value_, _environment_ and _excludedNames_ as the arguments.
       </emu-alg>
     </ins>
 
-    <emu-note>The following are the same as the ES2015 BindingInitialization except it collects a list of all destructured property names rather than just empty completion.</emu-note>
+    <emu-note>The following productions have moved to PropertyBindingInitialization to keep the return type of BindingInitialization consistent.</emu-note>
 
-    <emu-grammar>BindingPropertyList : BindingPropertyList `,` BindingProperty</emu-grammar>
-    <emu-alg>
-      1. Let <del>_status_</del> <ins>_boundNames_</ins> be the result of performing BindingInitialization for |BindingPropertyList| using _value_ and _environment_ as arguments.
-      1. ReturnIfAbrupt(<del>_status_</del> <ins>_boundNames_</ins>).
-      1. <del>Return</del> <ins>Let _nextNames_ be</ins> the result of performing BindingInitialization for |BindingProperty| using _value_ and _environment_ as arguments.
-      1. <ins>ReturnIfAbrupt(_nextNames_).</ins>
-      1. <ins>Append each item in _nextNames_ to the end of _boundNames_.</ins>
-      1. <ins>Return _boundNames_.</ins>
-    </emu-alg>
-
-    <emu-grammar>BindingProperty : SingleNameBinding</emu-grammar>
-    <emu-alg>
-      1. Let _name_ be the string that is the only element of BoundNames of |SingleNameBinding|.
-      1. <del>Return</del> <ins>Let _status_ be</ins> the result of performing KeyedBindingInitialization for |SingleNameBinding| using _value_, _environment_, and _name_ as the arguments.
-      1. <ins>ReturnIfAbrupt(_status_).</ins>
-      1. <ins>Return a new List containing _name_.</ins>
-    </emu-alg>
-
-    <emu-grammar>BindingProperty : PropertyName `:` BindingElement</emu-grammar>
-    <emu-alg>
-      1. Let _P_ be the result of evaluating |PropertyName|.
-      1. ReturnIfAbrupt(_P_).
-      1. <del>Return</del> <ins>Let _status_ be</ins> the result of performing KeyedBindingInitialization of |BindingElement| with _value_, _environment_, and _P_ as the arguments.
-      1. <ins>ReturnIfAbrupt(_status_).</ins>
-      1. <ins>Return a new List containing _P_.</ins>
-    </emu-alg>
+    <del class="block">
+      <emu-grammar>BindingPropertyList : BindingPropertyList `,` BindingProperty</emu-grammar>
+      <emu-grammar>BindingProperty : SingleNameBinding</emu-grammar>
+      <emu-grammar>BindingProperty : PropertyName `:` BindingElement</emu-grammar>
+    </del>
   </emu-clause>
+
+  <ins class="block">
+    <emu-clause id="Rest-RuntimeSemantics-PropertyBindingInitialization">
+      <h1>Runtime Semantics: PropertyBindingInitialization</h1>
+      <p>With parameters _value_ and _environment_.</p>
+
+      <emu-note>These collect a list of all bound property names rather than just empty completion.</emu-note>
+
+      <emu-grammar>BindingPropertyList : BindingPropertyList `,` BindingProperty</emu-grammar>
+      <emu-alg>
+        1. Let <del>_status_</del> <ins>_boundNames_</ins> be the result of performing BindingInitialization for |BindingPropertyList| using _value_ and _environment_ as arguments.
+        1. ReturnIfAbrupt(<del>_status_</del> <ins>_boundNames_</ins>).
+        1. <del>Return</del> <ins>Let _nextNames_ be</ins> the result of performing BindingInitialization for |BindingProperty| using _value_ and _environment_ as arguments.
+        1. <ins>ReturnIfAbrupt(_nextNames_).</ins>
+        1. <ins>Append each item in _nextNames_ to the end of _boundNames_.</ins>
+        1. <ins>Return _boundNames_.</ins>
+      </emu-alg>
+
+      <emu-grammar>BindingProperty : SingleNameBinding</emu-grammar>
+      <emu-alg>
+        1. Let _name_ be the string that is the only element of BoundNames of |SingleNameBinding|.
+        1. <del>Return</del> <ins>Let _status_ be</ins> the result of performing KeyedBindingInitialization for |SingleNameBinding| using _value_, _environment_, and _name_ as the arguments.
+        1. <ins>ReturnIfAbrupt(_status_).</ins>
+        1. <ins>Return a new List containing _name_.</ins>
+      </emu-alg>
+
+      <emu-grammar>BindingProperty : PropertyName `:` BindingElement</emu-grammar>
+      <emu-alg>
+        1. Let _P_ be the result of evaluating |PropertyName|.
+        1. ReturnIfAbrupt(_P_).
+        1. <del>Return</del> <ins>Let _status_ be</ins> the result of performing KeyedBindingInitialization of |BindingElement| with _value_, _environment_, and _P_ as the arguments.
+        1. <ins>ReturnIfAbrupt(_status_).</ins>
+        1. <ins>Return a new List containing _P_.</ins>
+      </emu-alg>
+    </emu-clause>
+  </ins>
+
+  <ins class="block">
+    <emu-clause id="Rest-RuntimeSemantics-RestBindingInitialization">
+      <h1>Runtime Semantics: RestBindingInitialization</h1>
+      <p>With parameters _value_, _environment_ and _excludedNames_.</p>
+
+      <emu-grammar>BindingRestProperty : `...` BindingIdentifier</emu-grammar>
+      <emu-alg>
+        1. Let _restObj_ be ObjectCreate(%ObjectPrototype%).
+        1. Let _assignStatus_ be CopyDataProperties(_restObj_, _value_, _excludedNames_).
+        1. ReturnIfAbrupt(_assignStatus_).
+        1. Let _bindingId_ be StringValue of |BindingIdentifier|.
+        1. Let _lhs_ be ResolveBinding(_bindingId_, _environment_).
+        1. ReturnIfAbrupt(_lhs_).
+        1. If _environment_ is *undefined*, return PutValue(_lhs_, _restObj_).
+        1. Return InitializeReferencedBinding(_lhs_, _restObj_).
+      </emu-alg>
+
+      <emu-grammar>BindingRestProperty : `...` BindingPattern</emu-grammar>
+      <emu-alg>
+        1. Let _restObj_ be ObjectCreate(%ObjectPrototype%).
+        1. Let _assignStatus_ be CopyDataProperties(_restObj_, _value_, _excludedNames_).
+        1. ReturnIfAbrupt(_assignStatus_).
+        1. Return the result of performing BindingInitialization of |BindingPattern| with _restObj_ and _environment_ as the arguments.
+      </emu-alg>
+    </emu-clause>
+  </ins>
 </emu-clause>
 
 <emu-clause id="AbstractOperations">
