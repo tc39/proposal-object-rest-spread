@@ -31,7 +31,7 @@ n; // { x: 1, y: 2, a: 3, b: 4 }
 
 ### Transpilers
 
-[Babel](https://babeljs.io/docs/usage/experimental/)
+[Babel](https://babeljs.io/docs/plugins/transform-object-rest-spread/)
 
 [JSTransform](https://github.com/facebook/jstransform)
 
