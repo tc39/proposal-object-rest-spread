@@ -60,14 +60,14 @@ let xyWithAandB = Object.assign({ x: 1 }, a, { y: 2 }, b, a);
 __Getters on the Object Initializer__
 ```javascript
 // Does not throw because .x isn't evaluated yet. It's defined.
-let aWithXGetter = { ...a, get x() { throws new Error('not thrown yet') } };
+let aWithXGetter = { ...a, get x() { throw new Error('not thrown yet') } };
 ```
 _Desugars into:_
 ```javascript
 let aWithXGetter = {};
 Object.assign(aWithXGetter, a);
 Object.defineProperty(aWithXGetter, "x", {
-  get(){ throws new Error('not thrown yet') },
+  get(){ throw new Error('not thrown yet') },
   enumerable : true,
   configurable : true
 });
@@ -77,7 +77,7 @@ __Getters in the Spread Object__
 ```javascript
 // Throws because the .x property of the inner object is evaluated when the
 // property value is copied over to the surrounding object initializer.
-let runtimeError = { ...a, ...{ get x() { throws new Error('thrown now') } } };
+let runtimeError = { ...a, ...{ get x() { throw new Error('thrown now') } } };
 ```
 
 __Setters Are Not Executed When They're Redefined__
