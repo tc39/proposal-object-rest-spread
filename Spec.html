@@ -11,7 +11,7 @@ contributors: Sebastian Markbåge
 
 <emu-intro id="intro">
 	<h1>Introduction</h1>
-	<p>Rest properties collect the remaining own enumerable property keys that are not already picked off by the destructuring pattern. Those keys and their values are copied onto a new object.</p>
+	<p>Rest properties collect the remaining field names that are not already picked off by the destructuring pattern. Those keys and their values are copied onto a new object.</p>
 
 	<pre><code class="javascript">
     1: let { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 };
@@ -20,7 +20,7 @@ contributors: Sebastian Markbåge
     4: z; // { a: 3, b: 4 }
 	</code></pre>
 
-	<p>Spread properties in object initializers copies own enumerable properties from a provided object onto the newly created object.</p>
+	<p>Spread properties in object initializers copies field names and their values from a provided object onto the newly created object.</p>
 
 	<pre><code class="javascript">
     1: let n = { x, y, ...z };
