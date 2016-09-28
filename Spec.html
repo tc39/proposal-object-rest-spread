@@ -140,9 +140,9 @@ contributors: Sebastian Markbåge
 
       <emu-grammar>AssignmentPropertyList : AssignmentPropertyList `,` AssignmentProperty</emu-grammar>
       <emu-alg>
-        1. Let <del>_status_</del> <ins>_propertyNames_</ins> be the result of performing DestructuringAssignmentEvaluation for |AssignmentPropertyList| using _value_ as the argument.
+        1. Let <del>_status_</del> <ins>_propertyNames_</ins> be the result of performing <ins>Property</ins>DestructuringAssignmentEvaluation for |AssignmentPropertyList| using _value_ as the argument.
         1. ReturnIfAbrupt(<del>_status_</del> <ins>_propertyNames_</ins>).
-        1. <del>Return</del> <ins>Let _nextNames_ be</ins> the result of performing DestructuringAssignmentEvaluation for |AssignmentProperty| using _value_ as the argument.
+        1. <del>Return</del> <ins>Let _nextNames_ be</ins> the result of performing <ins>Property</ins>DestructuringAssignmentEvaluation for |AssignmentProperty| using _value_ as the argument.
         1. <ins>ReturnIfAbrupt(_nextNames_).</ins>
         1. <ins>Append each item in _nextNames_ to the end of _propertyNames_.</ins>
         1. <ins>Return _propertyNames_.</ins>
@@ -243,9 +243,9 @@ contributors: Sebastian Markbåge
 
       <emu-grammar>BindingPropertyList : BindingPropertyList `,` BindingProperty</emu-grammar>
       <emu-alg>
-        1. Let <del>_status_</del> <ins>_boundNames_</ins> be the result of performing BindingInitialization for |BindingPropertyList| using _value_ and _environment_ as arguments.
+        1. Let <del>_status_</del> <ins>_boundNames_</ins> be the result of performing <ins>Property</ins>BindingInitialization for |BindingPropertyList| using _value_ and _environment_ as arguments.
         1. ReturnIfAbrupt(<del>_status_</del> <ins>_boundNames_</ins>).
-        1. <del>Return</del> <ins>Let _nextNames_ be</ins> the result of performing BindingInitialization for |BindingProperty| using _value_ and _environment_ as arguments.
+        1. <del>Return</del> <ins>Let _nextNames_ be</ins> the result of performing <ins>Property</ins>BindingInitialization for |BindingProperty| using _value_ and _environment_ as arguments.
         1. <ins>ReturnIfAbrupt(_nextNames_).</ins>
         1. <ins>Append each item in _nextNames_ to the end of _boundNames_.</ins>
         1. <ins>Return _boundNames_.</ins>
