@@ -102,8 +102,7 @@ contributors: Sebastian Markbåge
     </emu-grammar>
     <emu-alg>
       1. Perform ? RequireObjectCoercible(_value_).
-      1. <ins>Let _excludedNames_ be</ins> the result of performing <ins>Property</ins>DestructuringAssignmentEvaluation for |AssignmentPropertyList| using _value_ as the argument.
-      1. <ins>ReturnIfAbrupt(_excludedNames_).</ins>
+      1. Perform <ins>? Property</ins>DestructuringAssignmentEvaluation for |AssignmentPropertyList| using _value_ as the argument.
       1. <ins>Return NormalCompletion(~empty~).</ins>
     </emu-alg>
 
@@ -116,8 +115,7 @@ contributors: Sebastian Markbåge
 
       <emu-grammar>ObjectAssignmentPattern : `{` AssignmentPropertyList `,` AssignmentRestProperty `}`</emu-grammar>
       <emu-alg>
-        1. Let _excludedNames_ be the result of performing PropertyDestructuringAssignmentEvaluation for _AssignmentPropertyList_ using _value_ as the argument.
-        1. ReturnIfAbrupt(_excludedNames_).
+        1. Let _excludedNames_ be the result of performing ? PropertyDestructuringAssignmentEvaluation for _AssignmentPropertyList_ using _value_ as the argument.
         1. Return the result of performing RestDestructuringAssignmentEvaluation of _AssignmentRestProperty_ with _value_ and _excludedNames_ as the arguments.
       </emu-alg>
     </ins>
