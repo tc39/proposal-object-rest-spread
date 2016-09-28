@@ -301,6 +301,7 @@ contributors: Sebastian Markbåge
   <emu-clause id="AbstractOperations-CopyDataProperties" aoid="OrdinaryToPrimitive">
     <h1>CopyDataProperties (_target_, _source_, _excluded_)</h1>
     <emu-note>These spec proposals refer to the abstract operation CopyDataProperties(_target_, _source_, _excluded_) which follow similar semantics as the ES2015 Object.assign(_target_, ..._sources_) with the addition of the _excluded_ argument which is a list of property names to be excluded. It also uses the CreateDataProperty operation instead of Set.</emu-note>
+    <emu-note>The target passed is in here is always a newly created object which doesn't leak in case of an error being thrown. It's not observable when the actual object construction and initialization happens nor whether it is interleaved with reading the properties off the original object.</emu-note>
     <p>When the abstract operation CopyDataProperties is called with arguments _target_, _source_ and _excluded_, the following steps are taken:</p>
     <emu-alg>
       1. Assert: Type(_target_) is Object.
