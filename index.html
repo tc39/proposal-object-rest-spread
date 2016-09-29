@@ -1,0 +1,280 @@
+<!doctype html>
+<head><meta charset="utf-8">
+<link rel="stylesheet" href="ecmarkup.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+<script src="ecmarkup.js"></script>
+<title>Object Rest/Spread Properties</title><script type="application/json" id="menu-search-biblio">[{"type":"clause","id":"intro","aoid":null,"title":"Introduction","number":"","namespace":"<no location>","location":"","key":"Introduction"},{"type":"clause","id":"Spread","aoid":null,"title":"Spread Properties","number":"1","namespace":"<no location>","location":"","key":"Spread Properties"},{"type":"clause","id":"Spread-RuntimeSemantics-PropertyDefinitionEvaluation","aoid":null,"title":"Runtime Semantics: PropertyDefinitionEvaluation","number":"1.1","namespace":"<no location>","location":"","key":"Runtime Semantics: PropertyDefinitionEvaluation"},{"type":"clause","id":"Rest","aoid":null,"title":"Rest Properties","number":"2","namespace":"<no location>","location":"","key":"Rest Properties"},{"type":"clause","id":"Rest-RuntimeSemantics-DestructuringAssignmentEvaluation","aoid":null,"title":"Runtime Semantics: DestructuringAssignmentEvaluation","number":"2.1","namespace":"<no location>","location":"","key":"Runtime Semantics: DestructuringAssignmentEvaluation"},{"type":"clause","id":"Rest-RuntimeSemantics-PropertyDestructuringAssignmentEvaluation","aoid":null,"title":"Runtime Semantics: PropertyDestructuringAssignmentEvaluation","number":"2.2","namespace":"<no location>","location":"","key":"Runtime Semantics: PropertyDestructuringAssignmentEvaluation"},{"type":"clause","id":"Rest-RuntimeSemantics-RestDestructuringAssignmentEvaluation","aoid":null,"title":"Runtime Semantics: RestDestructuringAssignmentEvaluation","number":"2.3","namespace":"<no location>","location":"","key":"Runtime Semantics: RestDestructuringAssignmentEvaluation"},{"type":"clause","id":"Rest-RuntimeSemantics-BindingInitialization","aoid":null,"title":"Runtime Semantics: BindingInitialization","number":"2.4","namespace":"<no location>","location":"","key":"Runtime Semantics: BindingInitialization"},{"type":"clause","id":"Rest-RuntimeSemantics-PropertyBindingInitialization","aoid":null,"title":"Runtime Semantics: PropertyBindingInitialization","number":"2.5","namespace":"<no location>","location":"","key":"Runtime Semantics: PropertyBindingInitialization"},{"type":"clause","id":"Rest-RuntimeSemantics-RestBindingInitialization","aoid":null,"title":"Runtime Semantics: RestBindingInitialization","number":"2.6","namespace":"<no location>","location":"","key":"Runtime Semantics: RestBindingInitialization"},{"type":"clause","id":"AbstractOperations","aoid":null,"title":"Abstract Operations","number":"3","namespace":"<no location>","location":"","key":"Abstract Operations"},{"type":"op","aoid":"OrdinaryToPrimitive","refId":"AbstractOperations-CopyDataProperties","location":"","key":"OrdinaryToPrimitive"},{"type":"clause","id":"AbstractOperations-CopyDataProperties","aoid":"OrdinaryToPrimitive","title":"CopyDataProperties (_target_, _source_, _excluded_)","number":"3.1","namespace":"<no location>","location":"","key":"CopyDataProperties (_target_, _source_, _excluded_)"},{"type":"clause","id":"sec-copyright-and-software-license","aoid":null,"title":"Copyright & Software License","number":"A","namespace":"<no location>","location":"","key":"Copyright & Software License"},{"type":"production","id":"prod-PropertyDefinition","name":"PropertyDefinition","namespace":"<no location>","location":"","key":"PropertyDefinition"},{"type":"production","id":"prod-ObjectAssignmentPattern","name":"ObjectAssignmentPattern","namespace":"<no location>","location":"","key":"ObjectAssignmentPattern"},{"type":"production","id":"prod-AssignmentRestProperty","name":"AssignmentRestProperty","namespace":"<no location>","location":"","key":"AssignmentRestProperty"},{"type":"production","id":"prod-ObjectBindingPattern","name":"ObjectBindingPattern","namespace":"<no location>","location":"","key":"ObjectBindingPattern"},{"type":"production","id":"prod-BindingRestProperty","name":"BindingRestProperty","namespace":"<no location>","location":"","key":"BindingRestProperty"},{"type":"production","id":"prod-AssignmentPropertyList","name":"AssignmentPropertyList","namespace":"<no location>","location":"","key":"AssignmentPropertyList"},{"type":"production","id":"prod-AssignmentProperty","name":"AssignmentProperty","namespace":"<no location>","location":"","key":"AssignmentProperty"},{"type":"production","id":"prod-BindingPropertyList","name":"BindingPropertyList","namespace":"<no location>","location":"","key":"BindingPropertyList"},{"type":"production","id":"prod-BindingProperty","name":"BindingProperty","namespace":"<no location>","location":"","key":"BindingProperty"}]</script></head><body><div id="menu-toggle">☰</div><div id="menu"><div id="menu-search"><input type="text" id="menu-search-box" placeholder="Search..."><div id="menu-search-results" class="inactive"></div></div><div id="menu-toc"><ol class="toc"><li><span class="item-toggle-none"></span><a href="#intro" title="Introduction"><span class="secnum"></span> Introduction</a></li><li><span class="item-toggle">◢</span><a href="#Spread" title="Spread Properties"><span class="secnum">1</span> Spread Properties</a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#Spread-RuntimeSemantics-PropertyDefinitionEvaluation" title="Runtime Semantics: PropertyDefinitionEvaluation"><span class="secnum">1.1</span> RS: PropertyDefinitionEvaluation</a></li></ol></li><li><span class="item-toggle">◢</span><a href="#Rest" title="Rest Properties"><span class="secnum">2</span> Rest Properties</a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#Rest-RuntimeSemantics-DestructuringAssignmentEvaluation" title="Runtime Semantics: DestructuringAssignmentEvaluation"><span class="secnum">2.1</span> RS: DestructuringAssignmentEvaluation</a></li><li><span class="item-toggle-none"></span><a href="#Rest-RuntimeSemantics-PropertyDestructuringAssignmentEvaluation" title="Runtime Semantics: PropertyDestructuringAssignmentEvaluation"><span class="secnum">2.2</span> RS: PropertyDestructuringAssignmentEvaluation</a></li><li><span class="item-toggle-none"></span><a href="#Rest-RuntimeSemantics-RestDestructuringAssignmentEvaluation" title="Runtime Semantics: RestDestructuringAssignmentEvaluation"><span class="secnum">2.3</span> RS: RestDestructuringAssignmentEvaluation</a></li><li><span class="item-toggle-none"></span><a href="#Rest-RuntimeSemantics-BindingInitialization" title="Runtime Semantics: BindingInitialization"><span class="secnum">2.4</span> RS: BindingInitialization</a></li><li><span class="item-toggle-none"></span><a href="#Rest-RuntimeSemantics-PropertyBindingInitialization" title="Runtime Semantics: PropertyBindingInitialization"><span class="secnum">2.5</span> RS: PropertyBindingInitialization</a></li><li><span class="item-toggle-none"></span><a href="#Rest-RuntimeSemantics-RestBindingInitialization" title="Runtime Semantics: RestBindingInitialization"><span class="secnum">2.6</span> RS: RestBindingInitialization</a></li></ol></li><li><span class="item-toggle">◢</span><a href="#AbstractOperations" title="Abstract Operations"><span class="secnum">3</span> Abstract Operations</a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#AbstractOperations-CopyDataProperties" title="CopyDataProperties (_target_, _source_, _excluded_)"><span class="secnum">3.1</span> CopyDataProperties (<var>target</var>, <var>source</var>, <var>excluded</var>)</a></li></ol></li><li><span class="item-toggle-none"></span><a href="#sec-copyright-and-software-license" title="Copyright &amp; Software License"><span class="secnum">A</span> Copyright &amp; Software License</a></li></ol></div></div><h1 class="version">Stage 2 Draft / September 29, 2016</h1><h1 class="title">Object Rest/Spread Properties</h1>
+
+<emu-intro id="intro">
+	<h1><span class="secnum"></span>Introduction<span class="utils"><span class="anchor"><a href="#intro">#</a></span></span></h1>
+	<p>Rest properties collect the remaining field names that are not already picked off by the destructuring pattern. Those keys and their values are copied onto a new object.</p>
+
+	<pre><code class="javascript hljs"><span class="hljs-number">1</span>: <span class="hljs-keyword">let</span> { x, y, ...z } = { x: <span class="hljs-number">1</span>, y: <span class="hljs-number">2</span>, a: <span class="hljs-number">3</span>, b: <span class="hljs-number">4</span> };
+<span class="hljs-number">2</span>: x; <span class="hljs-comment">// 1</span>
+<span class="hljs-number">3</span>: y; <span class="hljs-comment">// 2</span>
+<span class="hljs-number">4</span>: z; <span class="hljs-comment">// { a: 3, b: 4 }</span></code></pre>
+
+	<p>Spread properties in object initializers copies field names and their values from a provided object onto the newly created object.</p>
+
+	<pre><code class="javascript hljs"><span class="hljs-number">1</span>: <span class="hljs-keyword">let</span> n = { x, y, ...z };
+<span class="hljs-number">2</span>: n; <span class="hljs-comment">// { x: 1, y: 2, a: 3, b: 4 }</span></code></pre>
+</emu-intro>
+
+<emu-clause id="Spread">
+  <h1><span class="secnum">1</span>Spread Properties<span class="utils"><span class="anchor"><a href="#Spread">#</a></span></span></h1>
+
+  <h2>Syntax</h2>
+
+  <emu-production name="PropertyDefinition" params="Yield" id="prod-PropertyDefinition">
+    <emu-nt params="Yield"><a href="#prod-PropertyDefinition">PropertyDefinition</a><emu-mods><emu-params>[Yield]</emu-params></emu-mods></emu-nt><emu-geq>:</emu-geq><emu-rhs><emu-nt params="?Yield"><a href="https://tc39.github.io/ecma262/#prod-IdentifierReference">IdentifierReference</a><emu-mods><emu-params>[?Yield]</emu-params></emu-mods></emu-nt></emu-rhs>
+    <emu-rhs><emu-nt params="?Yield"><a href="https://tc39.github.io/ecma262/#prod-CoverInitializedName">CoverInitializedName</a><emu-mods><emu-params>[?Yield]</emu-params></emu-mods></emu-nt></emu-rhs>
+    <emu-rhs><emu-nt params="?Yield"><a href="https://tc39.github.io/ecma262/#prod-PropertyName">PropertyName</a><emu-mods><emu-params>[?Yield]</emu-params></emu-mods></emu-nt><emu-t>:</emu-t><emu-nt params="In, ?Yield"><a href="https://tc39.github.io/ecma262/#prod-AssignmentExpression">AssignmentExpression</a><emu-mods><emu-params>[In, ?Yield]</emu-params></emu-mods></emu-nt></emu-rhs>
+    <emu-rhs><emu-nt params="?Yield"><a href="https://tc39.github.io/ecma262/#prod-MethodDefinition">MethodDefinition</a><emu-mods><emu-params>[?Yield]</emu-params></emu-mods></emu-nt></emu-rhs>
+    <ins class="block">
+      <emu-rhs><emu-t>...</emu-t><emu-nt params="In, ?Yield"><a href="https://tc39.github.io/ecma262/#prod-AssignmentExpression">AssignmentExpression</a><emu-mods><emu-params>[In, ?Yield]</emu-params></emu-mods></emu-nt></emu-rhs>
+    </ins>
+  </emu-production>
+
+  <emu-clause id="Spread-RuntimeSemantics-PropertyDefinitionEvaluation">
+    <h1><span class="secnum">1.1</span>Runtime Semantics: PropertyDefinitionEvaluation<span class="utils"><span class="anchor"><a href="#Spread-RuntimeSemantics-PropertyDefinitionEvaluation">#</a></span></span></h1>
+
+    <p>With parameters <var>object</var> and <var>enumerable</var>.</p>
+
+    <ins class="block">
+      <emu-grammar><emu-production name="PropertyDefinition" collapsed="">
+    <emu-nt><a href="#prod-PropertyDefinition">PropertyDefinition</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="5bb8853e"><emu-t>...</emu-t><emu-nt><a href="https://tc39.github.io/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+      <emu-alg><ol><li>Let <var>exprValue</var> be the result of evaluating <var>AssignmentExpression</var>.</li><li>Let <var>fromValue</var> be <emu-xref aoid="GetValue"><a href="https://tc39.github.io/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>exprValue</var>).</li><li><emu-xref aoid="ReturnIfAbrupt"><a href="https://tc39.github.io/ecma262/#sec-returnifabrupt">ReturnIfAbrupt</a></emu-xref>(<var>fromValue</var>).</li><li>Let <var>excludedNames</var> be a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>Return CopyDataProperties(<var>object</var>, <var>fromValue</var>, <var>excludedNames</var>).
+      </li></ol></emu-alg>
+    </ins>
+  </emu-clause>
+</emu-clause>
+
+<emu-clause id="Rest">
+  <h1><span class="secnum">2</span>Rest Properties<span class="utils"><span class="anchor"><a href="#Rest">#</a></span></span></h1>
+
+  <h2>Syntax</h2>
+
+  <emu-production name="ObjectAssignmentPattern" params="Yield" id="prod-ObjectAssignmentPattern">
+    <emu-nt params="Yield"><a href="#prod-ObjectAssignmentPattern">ObjectAssignmentPattern</a><emu-mods><emu-params>[Yield]</emu-params></emu-mods></emu-nt><emu-geq>:</emu-geq><emu-rhs><emu-t>{</emu-t><ins><emu-nt params="?Yield" optional=""><a href="#prod-AssignmentRestProperty">AssignmentRestProperty</a><emu-mods><emu-params>[?Yield]</emu-params><emu-opt>opt</emu-opt></emu-mods></emu-nt></ins><emu-t>}</emu-t></emu-rhs>
+    <emu-rhs><emu-t>{</emu-t><emu-nt params="?Yield"><a href="#prod-AssignmentPropertyList">AssignmentPropertyList</a><emu-mods><emu-params>[?Yield]</emu-params></emu-mods></emu-nt><emu-t>}</emu-t></emu-rhs>
+    <emu-rhs><emu-t>{</emu-t><emu-nt params="?Yield"><a href="#prod-AssignmentPropertyList">AssignmentPropertyList</a><emu-mods><emu-params>[?Yield]</emu-params></emu-mods></emu-nt><emu-t>,</emu-t><ins><emu-nt params="?Yield" optional=""><a href="#prod-AssignmentRestProperty">AssignmentRestProperty</a><emu-mods><emu-params>[?Yield]</emu-params><emu-opt>opt</emu-opt></emu-mods></emu-nt></ins><emu-t>}</emu-t></emu-rhs>
+  </emu-production>
+
+  <ins class="block">
+    <emu-production name="AssignmentRestProperty" params="Yield" id="prod-AssignmentRestProperty">
+      <emu-nt params="Yield"><a href="#prod-AssignmentRestProperty">AssignmentRestProperty</a><emu-mods><emu-params>[Yield]</emu-params></emu-mods></emu-nt><emu-geq>:</emu-geq><emu-rhs><emu-t>...</emu-t><emu-nt params="?Yield"><a href="https://tc39.github.io/ecma262/#prod-DestructuringAssignmentTarget">DestructuringAssignmentTarget</a><emu-mods><emu-params>[?Yield]</emu-params></emu-mods></emu-nt></emu-rhs>
+    </emu-production>
+  </ins>
+
+  <emu-production name="ObjectBindingPattern" params="Yield" id="prod-ObjectBindingPattern">
+    <emu-nt params="Yield"><a href="#prod-ObjectBindingPattern">ObjectBindingPattern</a><emu-mods><emu-params>[Yield]</emu-params></emu-mods></emu-nt><emu-geq>:</emu-geq><emu-rhs><emu-t>{</emu-t><ins><emu-nt params="?Yield" optional=""><a href="#prod-BindingRestProperty">BindingRestProperty</a><emu-mods><emu-params>[?Yield]</emu-params><emu-opt>opt</emu-opt></emu-mods></emu-nt></ins><emu-t>}</emu-t></emu-rhs>
+    <emu-rhs><emu-t>{</emu-t><emu-nt params="?Yield"><a href="#prod-BindingPropertyList">BindingPropertyList</a><emu-mods><emu-params>[?Yield]</emu-params></emu-mods></emu-nt><emu-t>}</emu-t></emu-rhs>
+    <emu-rhs><emu-t>{</emu-t><emu-nt params="?Yield"><a href="#prod-BindingPropertyList">BindingPropertyList</a><emu-mods><emu-params>[?Yield]</emu-params></emu-mods></emu-nt><emu-t>,</emu-t><ins><emu-nt params="?Yield" optional=""><a href="#prod-BindingRestProperty">BindingRestProperty</a><emu-mods><emu-params>[?Yield]</emu-params><emu-opt>opt</emu-opt></emu-mods></emu-nt></ins><emu-t>}</emu-t></emu-rhs>
+  </emu-production>
+
+  <ins class="block">
+    <emu-production name="BindingRestProperty" params="Yield" id="prod-BindingRestProperty">
+      <emu-nt params="Yield"><a href="#prod-BindingRestProperty">BindingRestProperty</a><emu-mods><emu-params>[Yield]</emu-params></emu-mods></emu-nt><emu-geq>:</emu-geq><emu-rhs><emu-t>...</emu-t><emu-nt params="?Yield"><a href="https://tc39.github.io/ecma262/#prod-BindingIdentifier">BindingIdentifier</a><emu-mods><emu-params>[?Yield]</emu-params></emu-mods></emu-nt></emu-rhs>
+      <emu-rhs><emu-t>...</emu-t><emu-nt params="?Yield"><a href="https://tc39.github.io/ecma262/#prod-BindingPattern">BindingPattern</a><emu-mods><emu-params>[?Yield]</emu-params></emu-mods></emu-nt></emu-rhs>
+    </emu-production>
+  </ins>
+
+  <emu-clause id="Rest-RuntimeSemantics-DestructuringAssignmentEvaluation">
+    <h1><span class="secnum">2.1</span>Runtime Semantics: DestructuringAssignmentEvaluation<span class="utils"><span class="anchor"><a href="#Rest-RuntimeSemantics-DestructuringAssignmentEvaluation">#</a></span></span></h1>
+    <p>With parameter <var>value</var>.</p>
+
+    <emu-grammar><emu-production name="ObjectAssignmentPattern">
+    <emu-nt><a href="#prod-ObjectAssignmentPattern">ObjectAssignmentPattern</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="02d75808"><emu-t>{</emu-t><emu-nt><a href="#prod-AssignmentPropertyList">AssignmentPropertyList</a></emu-nt><emu-t>}</emu-t></emu-rhs>
+    <emu-rhs a="831120ec"><emu-t>{</emu-t><emu-nt><a href="#prod-AssignmentPropertyList">AssignmentPropertyList</a></emu-nt><emu-t>,</emu-t><emu-t>}</emu-t></emu-rhs>
+</emu-production></emu-grammar>
+    <emu-alg><ol><li>Perform ? <emu-xref aoid="RequireObjectCoercible"><a href="https://tc39.github.io/ecma262/#sec-requireobjectcoercible">RequireObjectCoercible</a></emu-xref>(<var>value</var>).</li><li>Perform <ins>? Property</ins>DestructuringAssignmentEvaluation for <emu-nt><a href="#prod-AssignmentPropertyList">AssignmentPropertyList</a></emu-nt> using <var>value</var> as the argument.</li><li><ins>Return <emu-xref aoid="NormalCompletion"><a href="https://tc39.github.io/ecma262/#sec-normalcompletion">NormalCompletion</a></emu-xref>(<emu-const>empty</emu-const>).</ins>
+    </li></ol></emu-alg>
+
+    <ins class="block">
+      <emu-grammar><emu-production name="ObjectAssignmentPattern" collapsed="">
+    <emu-nt><a href="#prod-ObjectAssignmentPattern">ObjectAssignmentPattern</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="d3f69c83"><emu-t>{</emu-t><emu-nt><a href="#prod-AssignmentRestProperty">AssignmentRestProperty</a></emu-nt><emu-t>}</emu-t></emu-rhs>
+</emu-production></emu-grammar>
+      <emu-alg><ol><li>Let <var>excludedNames</var> be a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>Return the result of performing RestDestructuringAssignmentEvaluation of <var>AssignmentRestProperty</var> with <var>value</var> and <var>excludedNames</var> as the arguments.
+      </li></ol></emu-alg>
+
+      <emu-grammar><emu-production name="ObjectAssignmentPattern" collapsed="">
+    <emu-nt><a href="#prod-ObjectAssignmentPattern">ObjectAssignmentPattern</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="b3c2d7a5"><emu-t>{</emu-t><emu-nt><a href="#prod-AssignmentPropertyList">AssignmentPropertyList</a></emu-nt><emu-t>,</emu-t><emu-nt><a href="#prod-AssignmentRestProperty">AssignmentRestProperty</a></emu-nt><emu-t>}</emu-t></emu-rhs>
+</emu-production></emu-grammar>
+      <emu-alg><ol><li>Let <var>excludedNames</var> be the result of performing ? PropertyDestructuringAssignmentEvaluation for <var>AssignmentPropertyList</var> using <var>value</var> as the argument.</li><li>Return the result of performing RestDestructuringAssignmentEvaluation of <var>AssignmentRestProperty</var> with <var>value</var> and <var>excludedNames</var> as the arguments.
+      </li></ol></emu-alg>
+    </ins>
+
+    <emu-note><span class="note">Note</span>The following productions have moved to PropertyDestructuringAssignmentEvaluation to keep the return type of DestructuringAssignmentEvaluation consistent.</emu-note>
+
+    <del class="block">
+      <emu-grammar><emu-production name="AssignmentPropertyList" collapsed="" id="prod-AssignmentPropertyList">
+    <emu-nt><a href="#prod-AssignmentPropertyList">AssignmentPropertyList</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="c3680459"><emu-nt><a href="#prod-AssignmentPropertyList">AssignmentPropertyList</a></emu-nt><emu-t>,</emu-t><emu-nt><a href="#prod-AssignmentProperty">AssignmentProperty</a></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+      <emu-grammar><emu-production name="AssignmentProperty" collapsed="" id="prod-AssignmentProperty">
+    <emu-nt><a href="#prod-AssignmentProperty">AssignmentProperty</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="c55f7708"><emu-nt><a href="https://tc39.github.io/ecma262/#prod-IdentifierReference">IdentifierReference</a></emu-nt><emu-nt optional=""><a href="https://tc39.github.io/ecma262/#prod-Initializer">Initializer</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+      <emu-grammar><emu-production name="AssignmentProperty" collapsed="">
+    <emu-nt><a href="#prod-AssignmentProperty">AssignmentProperty</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="c9ac8882"><emu-nt><a href="https://tc39.github.io/ecma262/#prod-PropertyName">PropertyName</a></emu-nt><emu-t>:</emu-t><emu-nt><a href="https://tc39.github.io/ecma262/#prod-AssignmentElement">AssignmentElement</a></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+    </del>
+  </emu-clause>
+
+  <ins class="block">
+    <emu-clause id="Rest-RuntimeSemantics-PropertyDestructuringAssignmentEvaluation">
+      <h1><span class="secnum">2.2</span>Runtime Semantics: PropertyDestructuringAssignmentEvaluation<span class="utils"><span class="anchor"><a href="#Rest-RuntimeSemantics-PropertyDestructuringAssignmentEvaluation">#</a></span></span></h1>
+      <p>With parameters <var>value</var>.</p>
+
+      <emu-note><span class="note">Note</span>These collect a list of all destructured property names rather than just empty completion.</emu-note>
+
+      <emu-grammar><emu-production name="AssignmentPropertyList" collapsed="">
+    <emu-nt><a href="#prod-AssignmentPropertyList">AssignmentPropertyList</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="c3680459"><emu-nt><a href="#prod-AssignmentPropertyList">AssignmentPropertyList</a></emu-nt><emu-t>,</emu-t><emu-nt><a href="#prod-AssignmentProperty">AssignmentProperty</a></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+      <emu-alg><ol><li>Let <del><var>status</var></del> <ins><var>propertyNames</var></ins> be the result of performing <ins>Property</ins>DestructuringAssignmentEvaluation for <emu-nt><a href="#prod-AssignmentPropertyList">AssignmentPropertyList</a></emu-nt> using <var>value</var> as the argument.</li><li><emu-xref aoid="ReturnIfAbrupt"><a href="https://tc39.github.io/ecma262/#sec-returnifabrupt">ReturnIfAbrupt</a></emu-xref>(<del><var>status</var></del> <ins><var>propertyNames</var></ins>).</li><li><del>Return</del> <ins>Let <var>nextNames</var> be</ins> the result of performing <ins>Property</ins>DestructuringAssignmentEvaluation for <emu-nt><a href="#prod-AssignmentProperty">AssignmentProperty</a></emu-nt> using <var>value</var> as the argument.</li><li><ins><emu-xref aoid="ReturnIfAbrupt"><a href="https://tc39.github.io/ecma262/#sec-returnifabrupt">ReturnIfAbrupt</a></emu-xref>(<var>nextNames</var>).</ins></li><li><ins>Append each item in <var>nextNames</var> to the end of <var>propertyNames</var>.</ins></li><li><ins>Return <var>propertyNames</var>.</ins>
+      </li></ol></emu-alg>
+
+      <emu-grammar><emu-production name="AssignmentProperty" collapsed="">
+    <emu-nt><a href="#prod-AssignmentProperty">AssignmentProperty</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="c55f7708"><emu-nt><a href="https://tc39.github.io/ecma262/#prod-IdentifierReference">IdentifierReference</a></emu-nt><emu-nt optional=""><a href="https://tc39.github.io/ecma262/#prod-Initializer">Initializer</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+      <emu-alg><ol><li>Let <var>P</var> be StringValue of <emu-nt><a href="https://tc39.github.io/ecma262/#prod-IdentifierReference">IdentifierReference</a></emu-nt>.</li><li>Let <var>lref</var> be ? <emu-xref aoid="ResolveBinding"><a href="https://tc39.github.io/ecma262/#sec-resolvebinding">ResolveBinding</a></emu-xref>(<var>P</var>).</li><li>Let <var>v</var> be ? <emu-xref aoid="GetV"><a href="https://tc39.github.io/ecma262/#sec-getv">GetV</a></emu-xref>(<var>value</var>, <var>P</var>).</li><li>If <emu-nt optional=""><a href="https://tc39.github.io/ecma262/#prod-Initializer">Initializer</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt> is present and <var>v</var> is <emu-val>undefined</emu-val>, then<ol><li>Let <var>defaultValue</var> be the result of evaluating <emu-nt><a href="https://tc39.github.io/ecma262/#prod-Initializer">Initializer</a></emu-nt>.</li><li>Let <var>v</var> be ? <emu-xref aoid="GetValue"><a href="https://tc39.github.io/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>defaultValue</var>).</li><li>If <emu-xref aoid="IsAnonymousFunctionDefinition"><a href="https://tc39.github.io/ecma262/#sec-isanonymousfunctiondefinition">IsAnonymousFunctionDefinition</a></emu-xref>(<emu-nt><a href="https://tc39.github.io/ecma262/#prod-Initializer">Initializer</a></emu-nt>) is <emu-val>true</emu-val>, then<ol><li>Let <var>hasNameProperty</var> be ? <emu-xref aoid="HasOwnProperty"><a href="https://tc39.github.io/ecma262/#sec-hasownproperty">HasOwnProperty</a></emu-xref>(<var>v</var>, <code>"name"</code>).</li><li>If <var>hasNameProperty</var> is <emu-val>false</emu-val>, perform <emu-xref aoid="SetFunctionName"><a href="https://tc39.github.io/ecma262/#sec-setfunctionname">SetFunctionName</a></emu-xref>(<var>v</var>, <var>P</var>).</li></ol></li></ol></li><li><del>Return</del> <ins>Perform</ins> ? <emu-xref aoid="PutValue"><a href="https://tc39.github.io/ecma262/#sec-putvalue">PutValue</a></emu-xref>(<var>lref</var>, <var>v</var>).</li><li><ins>Return a new <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> containing <var>P</var>.</ins>
+      </li></ol></emu-alg>
+
+      <emu-grammar><emu-production name="AssignmentProperty" collapsed="">
+    <emu-nt><a href="#prod-AssignmentProperty">AssignmentProperty</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="c9ac8882"><emu-nt><a href="https://tc39.github.io/ecma262/#prod-PropertyName">PropertyName</a></emu-nt><emu-t>:</emu-t><emu-nt><a href="https://tc39.github.io/ecma262/#prod-AssignmentElement">AssignmentElement</a></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+      <emu-alg><ol><li>Let <var>name</var> be the result of evaluating <emu-nt><a href="https://tc39.github.io/ecma262/#prod-PropertyName">PropertyName</a></emu-nt>.</li><li><emu-xref aoid="ReturnIfAbrupt"><a href="https://tc39.github.io/ecma262/#sec-returnifabrupt">ReturnIfAbrupt</a></emu-xref>(<var>name</var>).</li><li><del>Return</del> <ins>Let <var>status</var> be</ins> the result of performing KeyedDestructuringAssignmentEvaluation of <emu-nt><a href="https://tc39.github.io/ecma262/#prod-AssignmentElement">AssignmentElement</a></emu-nt> with <var>value</var> and <var>name</var> as the arguments.</li><li><ins><emu-xref aoid="ReturnIfAbrupt"><a href="https://tc39.github.io/ecma262/#sec-returnifabrupt">ReturnIfAbrupt</a></emu-xref>(<var>status</var>).</ins></li><li><ins>Return a new <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> containing <var>name</var>.</ins>
+      </li></ol></emu-alg>
+    </emu-clause>
+  </ins>
+
+  <ins class="block">
+    <emu-clause id="Rest-RuntimeSemantics-RestDestructuringAssignmentEvaluation">
+      <h1><span class="secnum">2.3</span>Runtime Semantics: RestDestructuringAssignmentEvaluation<span class="utils"><span class="anchor"><a href="#Rest-RuntimeSemantics-RestDestructuringAssignmentEvaluation">#</a></span></span></h1>
+      <p>With parameters <var>value</var> and <var>excludedNames</var>.</p>
+
+      <emu-grammar><emu-production name="AssignmentRestProperty" params="Yield" collapsed="">
+    <emu-nt params="Yield"><a href="#prod-AssignmentRestProperty">AssignmentRestProperty</a><emu-mods><emu-params>[Yield]</emu-params></emu-mods></emu-nt><emu-geq>:</emu-geq><emu-rhs a="cf470c76"><emu-t>...</emu-t><emu-nt><a href="https://tc39.github.io/ecma262/#prod-DestructuringAssignmentTarget">DestructuringAssignmentTarget</a></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+      <emu-alg><ol><li>If <emu-nt><a href="https://tc39.github.io/ecma262/#prod-DestructuringAssignmentTarget">DestructuringAssignmentTarget</a></emu-nt> is neither an <emu-nt><a href="https://tc39.github.io/ecma262/#prod-ObjectLiteral">ObjectLiteral</a></emu-nt> nor an <emu-nt><a href="https://tc39.github.io/ecma262/#prod-ArrayLiteral">ArrayLiteral</a></emu-nt>, then<ol><li>Let <var>lref</var> be the result of evaluating <emu-nt><a href="https://tc39.github.io/ecma262/#prod-DestructuringAssignmentTarget">DestructuringAssignmentTarget</a></emu-nt>.</li><li><emu-xref aoid="ReturnIfAbrupt"><a href="https://tc39.github.io/ecma262/#sec-returnifabrupt">ReturnIfAbrupt</a></emu-xref>(<var>lref</var>).</li></ol></li><li>Let <var>restObj</var> be <emu-xref aoid="ObjectCreate"><a href="https://tc39.github.io/ecma262/#sec-objectcreate">ObjectCreate</a></emu-xref>(<emu-xref href="#sec-properties-of-the-object-prototype-object"><a href="https://tc39.github.io/ecma262/#sec-properties-of-the-object-prototype-object">%ObjectPrototype%</a></emu-xref>).</li><li>Let <var>assignStatus</var> be CopyDataProperties(<var>restObj</var>, <var>value</var>, <var>excludedNames</var>).</li><li><emu-xref aoid="ReturnIfAbrupt"><a href="https://tc39.github.io/ecma262/#sec-returnifabrupt">ReturnIfAbrupt</a></emu-xref>(<var>assignStatus</var>).</li><li>If <emu-nt><a href="https://tc39.github.io/ecma262/#prod-DestructuringAssignmentTarget">DestructuringAssignmentTarget</a></emu-nt> is neither an <emu-nt><a href="https://tc39.github.io/ecma262/#prod-ObjectLiteral">ObjectLiteral</a></emu-nt> nor an <emu-nt><a href="https://tc39.github.io/ecma262/#prod-ArrayLiteral">ArrayLiteral</a></emu-nt>, then<ol><li>Return <emu-xref aoid="PutValue"><a href="https://tc39.github.io/ecma262/#sec-putvalue">PutValue</a></emu-xref>(<var>lref</var>, <var>restObj</var>).</li></ol></li><li>Let <var>nestedAssignmentPattern</var> be the parse of the source text corresponding to <emu-nt><a href="https://tc39.github.io/ecma262/#prod-DestructuringAssignmentTarget">DestructuringAssignmentTarget</a></emu-nt> using either <emu-nt><a href="https://tc39.github.io/ecma262/#prod-AssignmentPattern">AssignmentPattern</a></emu-nt> or <emu-nt params="Yield"><a href="https://tc39.github.io/ecma262/#prod-AssignmentPattern">AssignmentPattern</a><emu-mods><emu-params>[Yield]</emu-params></emu-mods></emu-nt> as the goal symbol depending upon whether this <emu-nt><a href="#prod-AssignmentRestProperty">AssignmentRestProperty</a></emu-nt> has the <sub>[Yield]</sub> parameter.</li><li>Return the result of performing DestructuringAssignmentEvaluation of <var>nestedAssignmentPattern</var> with <var>restObj</var> as the argument.
+      </li></ol></emu-alg>
+    </emu-clause>
+  </ins>
+
+  <emu-clause id="Rest-RuntimeSemantics-BindingInitialization">
+    <h1><span class="secnum">2.4</span>Runtime Semantics: BindingInitialization<span class="utils"><span class="anchor"><a href="#Rest-RuntimeSemantics-BindingInitialization">#</a></span></span></h1>
+    <p>With parameters <var>value</var> and <var>environment</var>.</p>
+
+    <ins class="block">
+      <emu-grammar><emu-production name="ObjectBindingPattern">
+    <emu-nt><a href="#prod-ObjectBindingPattern">ObjectBindingPattern</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="1a4e378e"><emu-t>{</emu-t><emu-nt><a href="#prod-BindingPropertyList">BindingPropertyList</a></emu-nt><emu-t>}</emu-t></emu-rhs>
+    <emu-rhs a="0f5529a6"><emu-t>{</emu-t><emu-nt><a href="#prod-BindingPropertyList">BindingPropertyList</a></emu-nt><emu-t>,</emu-t><emu-t>}</emu-t></emu-rhs>
+</emu-production></emu-grammar>
+      <emu-alg><ol><li>Let <var>excludedNames</var> be the result of performing PropertyBindingInitialization for <emu-nt><a href="#prod-BindingPropertyList">BindingPropertyList</a></emu-nt> using <var>value</var> and <var>environment</var> as the argument.</li><li><emu-xref aoid="ReturnIfAbrupt"><a href="https://tc39.github.io/ecma262/#sec-returnifabrupt">ReturnIfAbrupt</a></emu-xref>(<var>excludedNames</var>).</li><li>Return <emu-xref aoid="NormalCompletion"><a href="https://tc39.github.io/ecma262/#sec-normalcompletion">NormalCompletion</a></emu-xref>(<emu-const>empty</emu-const>).
+      </li></ol></emu-alg>
+
+      <emu-grammar><emu-production name="ObjectBindingPattern" collapsed="">
+    <emu-nt><a href="#prod-ObjectBindingPattern">ObjectBindingPattern</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="1131455e"><emu-t>{</emu-t><emu-nt><a href="#prod-BindingRestProperty">BindingRestProperty</a></emu-nt><emu-t>}</emu-t></emu-rhs>
+</emu-production></emu-grammar>
+      <emu-alg><ol><li>Let <var>excludedNames</var> be a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>Return the result of performing RestBindingInitialization of <var>BindingRestProperty</var> with <var>value</var>, <var>environment</var> and <var>excludedNames</var> as the arguments.
+      </li></ol></emu-alg>
+
+      <emu-grammar><emu-production name="ObjectBindingPattern" collapsed="">
+    <emu-nt><a href="#prod-ObjectBindingPattern">ObjectBindingPattern</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="ba52f35d"><emu-t>{</emu-t><emu-nt><a href="#prod-BindingPropertyList">BindingPropertyList</a></emu-nt><emu-t>,</emu-t><emu-nt><a href="#prod-BindingRestProperty">BindingRestProperty</a></emu-nt><emu-t>}</emu-t></emu-rhs>
+</emu-production></emu-grammar>
+      <emu-alg><ol><li>Let <var>excludedNames</var> be the result of performing PropertyBindingInitialization of <emu-nt><a href="#prod-BindingPropertyList">BindingPropertyList</a></emu-nt> using <var>value</var> and <var>environment</var> as arguments.</li><li><emu-xref aoid="ReturnIfAbrupt"><a href="https://tc39.github.io/ecma262/#sec-returnifabrupt">ReturnIfAbrupt</a></emu-xref>(<var>excludedNames</var>).</li><li>Return the result of performing RestBindingInitialization of <var>BindingRestProperty</var> with <var>value</var>, <var>environment</var> and <var>excludedNames</var> as the arguments.
+      </li></ol></emu-alg>
+    </ins>
+
+    <emu-note><span class="note">Note</span>The following productions have moved to PropertyBindingInitialization to keep the return type of BindingInitialization consistent.</emu-note>
+
+    <del class="block">
+      <emu-grammar><emu-production name="BindingPropertyList" collapsed="" id="prod-BindingPropertyList">
+    <emu-nt><a href="#prod-BindingPropertyList">BindingPropertyList</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="0730de3b"><emu-nt><a href="#prod-BindingPropertyList">BindingPropertyList</a></emu-nt><emu-t>,</emu-t><emu-nt><a href="#prod-BindingProperty">BindingProperty</a></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+      <emu-grammar><emu-production name="BindingProperty" collapsed="" id="prod-BindingProperty">
+    <emu-nt><a href="#prod-BindingProperty">BindingProperty</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="94e17c00"><emu-nt><a href="https://tc39.github.io/ecma262/#prod-SingleNameBinding">SingleNameBinding</a></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+      <emu-grammar><emu-production name="BindingProperty" collapsed="">
+    <emu-nt><a href="#prod-BindingProperty">BindingProperty</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="987bd1c2"><emu-nt><a href="https://tc39.github.io/ecma262/#prod-PropertyName">PropertyName</a></emu-nt><emu-t>:</emu-t><emu-nt><a href="https://tc39.github.io/ecma262/#prod-BindingElement">BindingElement</a></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+    </del>
+  </emu-clause>
+
+  <ins class="block">
+    <emu-clause id="Rest-RuntimeSemantics-PropertyBindingInitialization">
+      <h1><span class="secnum">2.5</span>Runtime Semantics: PropertyBindingInitialization<span class="utils"><span class="anchor"><a href="#Rest-RuntimeSemantics-PropertyBindingInitialization">#</a></span></span></h1>
+      <p>With parameters <var>value</var> and <var>environment</var>.</p>
+
+      <emu-note><span class="note">Note</span>These collect a list of all bound property names rather than just empty completion.</emu-note>
+
+      <emu-grammar><emu-production name="BindingPropertyList" collapsed="">
+    <emu-nt><a href="#prod-BindingPropertyList">BindingPropertyList</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="0730de3b"><emu-nt><a href="#prod-BindingPropertyList">BindingPropertyList</a></emu-nt><emu-t>,</emu-t><emu-nt><a href="#prod-BindingProperty">BindingProperty</a></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+      <emu-alg><ol><li>Let <del><var>status</var></del> <ins><var>boundNames</var></ins> be the result of performing <ins>Property</ins>BindingInitialization for <emu-nt><a href="#prod-BindingPropertyList">BindingPropertyList</a></emu-nt> using <var>value</var> and <var>environment</var> as arguments.</li><li><emu-xref aoid="ReturnIfAbrupt"><a href="https://tc39.github.io/ecma262/#sec-returnifabrupt">ReturnIfAbrupt</a></emu-xref>(<del><var>status</var></del> <ins><var>boundNames</var></ins>).</li><li><del>Return</del> <ins>Let <var>nextNames</var> be</ins> the result of performing <ins>Property</ins>BindingInitialization for <emu-nt><a href="#prod-BindingProperty">BindingProperty</a></emu-nt> using <var>value</var> and <var>environment</var> as arguments.</li><li><ins><emu-xref aoid="ReturnIfAbrupt"><a href="https://tc39.github.io/ecma262/#sec-returnifabrupt">ReturnIfAbrupt</a></emu-xref>(<var>nextNames</var>).</ins></li><li><ins>Append each item in <var>nextNames</var> to the end of <var>boundNames</var>.</ins></li><li><ins>Return <var>boundNames</var>.</ins>
+      </li></ol></emu-alg>
+
+      <emu-grammar><emu-production name="BindingProperty" collapsed="">
+    <emu-nt><a href="#prod-BindingProperty">BindingProperty</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="94e17c00"><emu-nt><a href="https://tc39.github.io/ecma262/#prod-SingleNameBinding">SingleNameBinding</a></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+      <emu-alg><ol><li>Let <var>name</var> be the string that is the only element of BoundNames of <emu-nt><a href="https://tc39.github.io/ecma262/#prod-SingleNameBinding">SingleNameBinding</a></emu-nt>.</li><li><del>Return</del> <ins>Let <var>status</var> be</ins> the result of performing KeyedBindingInitialization for <emu-nt><a href="https://tc39.github.io/ecma262/#prod-SingleNameBinding">SingleNameBinding</a></emu-nt> using <var>value</var>, <var>environment</var>, and <var>name</var> as the arguments.</li><li><ins><emu-xref aoid="ReturnIfAbrupt"><a href="https://tc39.github.io/ecma262/#sec-returnifabrupt">ReturnIfAbrupt</a></emu-xref>(<var>status</var>).</ins></li><li><ins>Return a new <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> containing <var>name</var>.</ins>
+      </li></ol></emu-alg>
+
+      <emu-grammar><emu-production name="BindingProperty" collapsed="">
+    <emu-nt><a href="#prod-BindingProperty">BindingProperty</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="987bd1c2"><emu-nt><a href="https://tc39.github.io/ecma262/#prod-PropertyName">PropertyName</a></emu-nt><emu-t>:</emu-t><emu-nt><a href="https://tc39.github.io/ecma262/#prod-BindingElement">BindingElement</a></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+      <emu-alg><ol><li>Let <var>P</var> be the result of evaluating <emu-nt><a href="https://tc39.github.io/ecma262/#prod-PropertyName">PropertyName</a></emu-nt>.</li><li><emu-xref aoid="ReturnIfAbrupt"><a href="https://tc39.github.io/ecma262/#sec-returnifabrupt">ReturnIfAbrupt</a></emu-xref>(<var>P</var>).</li><li><del>Return</del> <ins>Let <var>status</var> be</ins> the result of performing KeyedBindingInitialization of <emu-nt><a href="https://tc39.github.io/ecma262/#prod-BindingElement">BindingElement</a></emu-nt> with <var>value</var>, <var>environment</var>, and <var>P</var> as the arguments.</li><li><ins><emu-xref aoid="ReturnIfAbrupt"><a href="https://tc39.github.io/ecma262/#sec-returnifabrupt">ReturnIfAbrupt</a></emu-xref>(<var>status</var>).</ins></li><li><ins>Return a new <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> containing <var>P</var>.</ins>
+      </li></ol></emu-alg>
+    </emu-clause>
+  </ins>
+
+  <ins class="block">
+    <emu-clause id="Rest-RuntimeSemantics-RestBindingInitialization">
+      <h1><span class="secnum">2.6</span>Runtime Semantics: RestBindingInitialization<span class="utils"><span class="anchor"><a href="#Rest-RuntimeSemantics-RestBindingInitialization">#</a></span></span></h1>
+      <p>With parameters <var>value</var>, <var>environment</var> and <var>excludedNames</var>.</p>
+
+      <emu-grammar><emu-production name="BindingRestProperty" collapsed="">
+    <emu-nt><a href="#prod-BindingRestProperty">BindingRestProperty</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="145844de"><emu-t>...</emu-t><emu-nt><a href="https://tc39.github.io/ecma262/#prod-BindingIdentifier">BindingIdentifier</a></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+      <emu-alg><ol><li>Let <var>restObj</var> be <emu-xref aoid="ObjectCreate"><a href="https://tc39.github.io/ecma262/#sec-objectcreate">ObjectCreate</a></emu-xref>(<emu-xref href="#sec-properties-of-the-object-prototype-object"><a href="https://tc39.github.io/ecma262/#sec-properties-of-the-object-prototype-object">%ObjectPrototype%</a></emu-xref>).</li><li>Let <var>assignStatus</var> be CopyDataProperties(<var>restObj</var>, <var>value</var>, <var>excludedNames</var>).</li><li><emu-xref aoid="ReturnIfAbrupt"><a href="https://tc39.github.io/ecma262/#sec-returnifabrupt">ReturnIfAbrupt</a></emu-xref>(<var>assignStatus</var>).</li><li>Let <var>bindingId</var> be StringValue of <emu-nt><a href="https://tc39.github.io/ecma262/#prod-BindingIdentifier">BindingIdentifier</a></emu-nt>.</li><li>Let <var>lhs</var> be <emu-xref aoid="ResolveBinding"><a href="https://tc39.github.io/ecma262/#sec-resolvebinding">ResolveBinding</a></emu-xref>(<var>bindingId</var>, <var>environment</var>).</li><li><emu-xref aoid="ReturnIfAbrupt"><a href="https://tc39.github.io/ecma262/#sec-returnifabrupt">ReturnIfAbrupt</a></emu-xref>(<var>lhs</var>).</li><li>If <var>environment</var> is <emu-val>undefined</emu-val>, return <emu-xref aoid="PutValue"><a href="https://tc39.github.io/ecma262/#sec-putvalue">PutValue</a></emu-xref>(<var>lhs</var>, <var>restObj</var>).</li><li>Return <emu-xref aoid="InitializeReferencedBinding"><a href="https://tc39.github.io/ecma262/#sec-initializereferencedbinding">InitializeReferencedBinding</a></emu-xref>(<var>lhs</var>, <var>restObj</var>).
+      </li></ol></emu-alg>
+
+      <emu-grammar><emu-production name="BindingRestProperty" collapsed="">
+    <emu-nt><a href="#prod-BindingRestProperty">BindingRestProperty</a></emu-nt><emu-geq>:</emu-geq><emu-rhs a="1e627394"><emu-t>...</emu-t><emu-nt><a href="https://tc39.github.io/ecma262/#prod-BindingPattern">BindingPattern</a></emu-nt></emu-rhs>
+</emu-production></emu-grammar>
+      <emu-alg><ol><li>Let <var>restObj</var> be <emu-xref aoid="ObjectCreate"><a href="https://tc39.github.io/ecma262/#sec-objectcreate">ObjectCreate</a></emu-xref>(<emu-xref href="#sec-properties-of-the-object-prototype-object"><a href="https://tc39.github.io/ecma262/#sec-properties-of-the-object-prototype-object">%ObjectPrototype%</a></emu-xref>).</li><li>Let <var>assignStatus</var> be CopyDataProperties(<var>restObj</var>, <var>value</var>, <var>excludedNames</var>).</li><li><emu-xref aoid="ReturnIfAbrupt"><a href="https://tc39.github.io/ecma262/#sec-returnifabrupt">ReturnIfAbrupt</a></emu-xref>(<var>assignStatus</var>).</li><li>Return the result of performing BindingInitialization of <emu-nt><a href="https://tc39.github.io/ecma262/#prod-BindingPattern">BindingPattern</a></emu-nt> with <var>restObj</var> and <var>environment</var> as the arguments.
+      </li></ol></emu-alg>
+    </emu-clause>
+  </ins>
+</emu-clause>
+
+<emu-clause id="AbstractOperations">
+  <h1><span class="secnum">3</span>Abstract Operations<span class="utils"><span class="anchor"><a href="#AbstractOperations">#</a></span></span></h1>
+  <emu-clause id="AbstractOperations-CopyDataProperties" aoid="OrdinaryToPrimitive">
+    <h1><span class="secnum">3.1</span>CopyDataProperties (<var>target</var>, <var>source</var>, <var>excluded</var>)<span class="utils"><span class="anchor"><a href="#AbstractOperations-CopyDataProperties">#</a></span></span></h1>
+    <emu-note><span class="note">Note 1</span>These spec proposals refer to the abstract operation CopyDataProperties(<var>target</var>, <var>source</var>, <var>excluded</var>) which follow similar semantics as the ES2015 Object.assign(<var>target</var>, ...<var>sources</var>) with the addition of the <var>excluded</var> argument which is a list of property names to be excluded. It also uses the <emu-xref aoid="CreateDataProperty"><a href="https://tc39.github.io/ecma262/#sec-createdataproperty">CreateDataProperty</a></emu-xref> operation instead of Set.</emu-note>
+    <emu-note><span class="note">Note 2</span>The target passed is in here is always a newly created object which doesn't leak in case of an error being thrown. It's not observable when the actual object construction and initialization happens nor whether it is interleaved with reading the properties off the original object.</emu-note>
+    <p>When the abstract operation CopyDataProperties is called with arguments <var>target</var>, <var>source</var> and <var>excluded</var>, the following steps are taken:</p>
+    <emu-alg><ol><li>Assert: <emu-xref aoid="Type"><a href="https://tc39.github.io/ecma262/#sec-ecmascript-data-types-and-values">Type</a></emu-xref>(<var>target</var>) is Object.</li><li>If <var>source</var> is <emu-val>undefined</emu-val> or <emu-val>null</emu-val>, let <var>keys</var> be a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>Else,<ol><li>Let <var>from</var> be <emu-xref aoid="ToObject"><a href="https://tc39.github.io/ecma262/#sec-toobject">ToObject</a></emu-xref>(<var>source</var>).</li><li>Let <var>keys</var> be ? <var>from</var>.[[OwnPropertyKeys]]().</li></ol></li><li>Repeat for each element <var>nextKey</var> of <var>keys</var> in <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> order,<ol><li>If <code>nextKey</code> is not contained in <code>excluded</code>, then<ol><li>Let <var>desc</var> be ? <var>from</var>.[[GetOwnProperty]](<var>nextKey</var>).</li><li>If <var>desc</var> is not <emu-val>undefined</emu-val> and <var>desc</var>.[[Enumerable]] is <emu-val>true</emu-val>, then<ol><li>Let <var>propValue</var> be ? <emu-xref aoid="Get"><a href="https://tc39.github.io/ecma262/#sec-get-o-p">Get</a></emu-xref>(<var>from</var>, <var>nextKey</var>).</li><li>Perform ? <emu-xref aoid="CreateDataProperty"><a href="https://tc39.github.io/ecma262/#sec-createdataproperty">CreateDataProperty</a></emu-xref>(<var>target</var>, <var>nextKey</var>, <var>propValue</var>).</li></ol></li></ol></li></ol></li><li>Return <var>target</var>.
+    </li></ol></emu-alg>
+  </emu-clause>
+</emu-clause><emu-annex id="sec-copyright-and-software-license">
+      <h1><span class="secnum">A</span>Copyright &amp; Software License<span class="utils"><span class="anchor"><a href="#sec-copyright-and-software-license">#</a></span></span></h1>
+      
+      <h2>Copyright Notice</h2>
+      <p>© 2016 Sebastian Markbåge</p>
+
+      <h2>Software License</h2>
+      <p>All Software contained in this document ("Software") is protected by copyright and is being made available under the "BSD License", included below. This Software may be subject to third party rights (rights from parties other than Ecma International), including patent rights, and no licenses under such third party rights are granted under this license even if the third party concerned is a member of Ecma International. SEE THE ECMA CODE OF CONDUCT IN PATENT MATTERS AVAILABLE AT http://www.ecma-international.org/memento/codeofconduct.htm FOR INFORMATION REGARDING THE LICENSING OF PATENT CLAIMS THAT ARE REQUIRED TO IMPLEMENT ECMA INTERNATIONAL STANDARDS.</p>
+
+<p>Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:</p>
+
+<ol>
+  <li>Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.</li>
+  <li>Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.</li>
+  <li>Neither the name of the authors nor Ecma International may be used to endorse or promote products derived from this software without specific prior written permission.</li>
+</ol>
+
+<p>THIS SOFTWARE IS PROVIDED BY THE ECMA INTERNATIONAL "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL ECMA INTERNATIONAL BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+
+    </emu-annex>
+</body>
