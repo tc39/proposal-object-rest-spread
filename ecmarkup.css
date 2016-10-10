@@ -376,6 +376,11 @@ tr.ins > td > ins, li.ins > ins {
   border: 0;
 }
 
+/* Grammar Diff Styles */
+emu-grammar > ins, emu-grammar > del, emu-production > ins, emu-production > del {
+  display: block;
+}
+
 /* Menu Styles */
 #menu-toggle {
   font-size: 2em;
