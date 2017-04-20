@@ -305,16 +305,21 @@ contributors: Sebastian Markbåge
     <p>When the abstract operation CopyDataProperties is called with arguments _target_, _source_ and _excluded_, the following steps are taken:</p>
     <emu-alg>
       1. Assert: Type(_target_) is Object.
+      1. Assert: Type(_excluded_) is List.
       1. If _source_ is *undefined* or *null*, let _keys_ be a new empty List.
       1. Else,
         1. Let _from_ be ! ToObject(_source_).
         1. Let _keys_ be ? _from_.[[OwnPropertyKeys]]().
       1. Repeat for each element _nextKey_ of _keys_ in List order,
-        1. If `nextKey` is not contained in `excluded`, then
-          1. Let _desc_ be ? _from_.[[GetOwnProperty]](_nextKey_).
-          1. If _desc_ is not *undefined* and _desc_.[[Enumerable]] is *true*, then
-            1. Let _propValue_ be ? Get(_from_, _nextKey_).
-            1. Perform ! CreateDataProperty(_target_, _nextKey_, _propValue_).
+        1. Let _found_ be *false*.
+        1. Repeat for each element _e_ of _excluded_,
+          1. If _e_ is not empty and SameValueZero(_e_, _nextKey_) is true, then
+            1. Set _found_ to *true*.
+        1. If _found_ is *false*, then
+            1. Let _desc_ be ? _from_.[[GetOwnProperty]](_nextKey_).
+            1. If _desc_ is not *undefined* and _desc_.[[Enumerable]] is *true*, then
+              1. Let _propValue_ be ? Get(_from_, _nextKey_).
+              1. Perform ! CreateDataProperty(_target_, _nextKey_, _propValue_).
       1. Return _target_.
     </emu-alg>
   </emu-clause>
