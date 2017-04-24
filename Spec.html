@@ -313,7 +313,7 @@ contributors: Sebastian Markbåge
       1. Repeat for each element _nextKey_ of _keys_ in List order,
         1. Let _found_ be *false*.
         1. Repeat for each element _e_ of _excluded_,
-          1. If _e_ is not empty and SameValueZero(_e_, _nextKey_) is true, then
+          1. If _e_ is not empty and SameValue(_e_, _nextKey_) is true, then
             1. Set _found_ to *true*.
         1. If _found_ is *false*, then
             1. Let _desc_ be ? _from_.[[GetOwnProperty]](_nextKey_).
