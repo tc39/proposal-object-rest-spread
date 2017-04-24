@@ -85,9 +85,9 @@ __Setters Are Not Executed When They're Redefined__
 let z = { set x() { throw new Error(); }, ...{ x: 1 } }; // No error
 ```
 
-__Null/Undefined Are Ignored__
+__False Evaluating Operands Are Ignored__
 ```javascript
-let emptyObject = { ...null, ...undefined }; // no runtime error
+let emptyObject = { ...false, ...null, ...undefined }; // no runtime error
 ```
 
 __Updating Deep Immutable Object__
