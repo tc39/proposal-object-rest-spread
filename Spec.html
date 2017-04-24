@@ -55,7 +55,7 @@ contributors: Sebastian Markbåge
         1. Let _fromValue_ be GetValue(_exprValue_).
         1. ReturnIfAbrupt(_fromValue_).
         1. Let _excludedNames_ be a new empty List.
-        1. Return CopyDataProperties(_object_, _fromValue_, _excludedNames_).
+        1. Return ? CopyDataProperties(_object_, _fromValue_, _excludedNames_).
       </emu-alg>
     </ins>
   </emu-clause>
@@ -314,7 +314,7 @@ contributors: Sebastian Markbåge
           1. Let _desc_ be ? _from_.[[GetOwnProperty]](_nextKey_).
           1. If _desc_ is not *undefined* and _desc_.[[Enumerable]] is *true*, then
             1. Let _propValue_ be ? Get(_from_, _nextKey_).
-            1. Perform ? CreateDataProperty(_target_, _nextKey_, _propValue_).
+            1. Perform ! CreateDataProperty(_target_, _nextKey_, _propValue_).
       1. Return _target_.
     </emu-alg>
   </emu-clause>
