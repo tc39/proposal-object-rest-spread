@@ -307,7 +307,7 @@ contributors: Sebastian Markbåge
       1. Assert: Type(_target_) is Object.
       1. If _source_ is *undefined* or *null*, let _keys_ be a new empty List.
       1. Else,
-        1. Let _from_ be ToObject(_source_).
+        1. Let _from_ be ! ToObject(_source_).
         1. Let _keys_ be ? _from_.[[OwnPropertyKeys]]().
       1. Repeat for each element _nextKey_ of _keys_ in List order,
         1. If `nextKey` is not contained in `excluded`, then
