@@ -5,9 +5,9 @@ ECMAScript 6 introduces [rest elements](https://developer.mozilla.org/en-US/docs
 
 This proposal introduces analogous [rest properties](Rest.md) for object destructuring assignment and [spread properties](Spread.md) for object literals.
 
-### [Specification](http://sebmarkbage.github.io/ecmascript-rest-spread/)
+### [Specification](https://tc39.github.io/proposal-object-rest-spread/)
 
-[Specification](http://sebmarkbage.github.io/ecmascript-rest-spread/)
+[Specification](https://tc39.github.io/proposal-object-rest-spread/)
 
 ### [Rest Properties](Rest.md)
 
