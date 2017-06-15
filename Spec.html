@@ -83,7 +83,6 @@ contributors: Sebastian Markbåge
     <ins class="block">
       BindingRestProperty[Yield, Await] :
         `...` BindingIdentifier[?Yield, ?Await]
-        `...` BindingPattern[?Yield, ?Await]
     </ins>
   </emu-grammar>
 
@@ -279,14 +278,6 @@ contributors: Sebastian Markbåge
         1. ReturnIfAbrupt(_lhs_).
         1. If _environment_ is *undefined*, return PutValue(_lhs_, _restObj_).
         1. Return InitializeReferencedBinding(_lhs_, _restObj_).
-      </emu-alg>
-
-      <emu-grammar>BindingRestProperty : `...` BindingPattern</emu-grammar>
-      <emu-alg>
-        1. Let _restObj_ be ObjectCreate(%ObjectPrototype%).
-        1. Let _assignStatus_ be CopyDataProperties(_restObj_, _value_, _excludedNames_).
-        1. ReturnIfAbrupt(_assignStatus_).
-        1. Return the result of performing BindingInitialization of |BindingPattern| with _restObj_ and _environment_ as the arguments.
       </emu-alg>
     </emu-clause>
   </ins>
