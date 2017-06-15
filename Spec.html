@@ -33,15 +33,13 @@ contributors: Sebastian Markbåge
 
   <h2>Syntax</h2>
 
-  <emu-production name="PropertyDefinition" params="Yield">
-    <emu-rhs><emu-nt params="?Yield">IdentifierReference</emu-nt></emu-rhs>
-    <emu-rhs><emu-nt params="?Yield">CoverInitializedName</emu-nt></emu-rhs>
-    <emu-rhs><emu-nt params="?Yield">PropertyName</emu-nt><emu-t>:</emu-t><emu-nt params="In, ?Yield">AssignmentExpression</emu-nt></emu-rhs>
-    <emu-rhs><emu-nt params="?Yield">MethodDefinition</emu-nt></emu-rhs>
-    <ins class="block">
-      <emu-rhs><emu-t>...</emu-t><emu-nt params="In, ?Yield">AssignmentExpression</emu-nt></emu-rhs>
-    </ins>
-  </emu-production>
+  <emu-grammar>
+    PropertyDefinition[Yield, Await] :
+      IdentifierReference[?Yield, ?Await]
+      CoverInitializedName[?Yield, ?Await]
+      PropertyName[?Yield, ?Await]
+      <ins class="block">`...` AssignmentExpression[In, ?Yield, ?Await]</ins>
+  </emu-grammar>
 
   <emu-clause id="Spread-RuntimeSemantics-PropertyDefinitionEvaluation">
     <h1>Runtime Semantics: PropertyDefinitionEvaluation</h1>
@@ -66,30 +64,28 @@ contributors: Sebastian Markbåge
 
   <h2>Syntax</h2>
 
-  <emu-production name="ObjectAssignmentPattern" params="Yield">
-    <emu-rhs><emu-t>{</emu-t><ins><emu-nt params="?Yield" optional>AssignmentRestProperty</emu-nt></ins><emu-t>}</emu-t></emu-rhs>
-    <emu-rhs><emu-t>{</emu-t><emu-nt params="?Yield">AssignmentPropertyList</emu-nt><emu-t>}</emu-t></emu-rhs>
-    <emu-rhs><emu-t>{</emu-t><emu-nt params="?Yield">AssignmentPropertyList</emu-nt><emu-t>,</emu-t><ins><emu-nt params="?Yield" optional>AssignmentRestProperty</emu-nt></ins><emu-t>}</emu-t></emu-rhs>
-  </emu-production>
+  <emu-grammar>
+    ObjectAssignmentPattern[Yield, Await] :
+      `{` <ins>AssignmentRestProperty[?Yield, ?Await]?</ins> `}`
+      `{` AssignmentPropertyList[?Yield, ?Await] `}`
+      `{` AssignmentPropertyList[?Yield, ?Await] `,` <ins>AssignmentRestProperty[?Yield, ?Await]?</ins> `}`
 
-  <ins class="block">
-    <emu-production name="AssignmentRestProperty" params="Yield">
-      <emu-rhs><emu-t>...</emu-t><emu-nt params="?Yield">DestructuringAssignmentTarget</emu-nt></emu-rhs>
-    </emu-production>
-  </ins>
+    <ins class="block">
+      AssignmentRestProperty[Yield, Await] :
+        `...` DestructuringAssignmentTarget[Yield, Await]
+    </ins>
 
-  <emu-production name="ObjectBindingPattern" params="Yield">
-    <emu-rhs><emu-t>{</emu-t><ins><emu-nt params="?Yield" optional>BindingRestProperty</emu-nt></ins><emu-t>}</emu-t></emu-rhs>
-    <emu-rhs><emu-t>{</emu-t><emu-nt params="?Yield">BindingPropertyList</emu-nt><emu-t>}</emu-t></emu-rhs>
-    <emu-rhs><emu-t>{</emu-t><emu-nt params="?Yield">BindingPropertyList</emu-nt><emu-t>,</emu-t><ins><emu-nt params="?Yield" optional>BindingRestProperty</emu-nt></ins><emu-t>}</emu-t></emu-rhs>
-  </emu-production>
+    ObjectBindingPattern[Yield, Await] :
+      `{` <ins>BindingRestProperty[?Yield, ?Await]?</ins> `}`
+      `{` BindingPropertyList[?Yield, ?Await] `}`
+      `{` BindingPropertyList[?Yield, ?Await] `,` <ins>BindingRestProperty[?Yield, ?Await]?</ins> `}`
 
-  <ins class="block">
-    <emu-production name="BindingRestProperty" params="Yield">
-      <emu-rhs><emu-t>...</emu-t><emu-nt params="?Yield">BindingIdentifier</emu-nt></emu-rhs>
-      <emu-rhs><emu-t>...</emu-t><emu-nt params="?Yield">BindingPattern</emu-nt></emu-rhs>
-    </emu-production>
-  </ins>
+    <ins class="block">
+      BindingRestProperty[Yield, Await] :
+        `...` BindingIdentifier[?Yield, ?Await]
+        `...` BindingPattern[?Yield, ?Await]
+    </ins>
+  </emu-grammar>
 
   <emu-clause id="Rest-RuntimeSemantics-DestructuringAssignmentEvaluation">
     <h1>Runtime Semantics: DestructuringAssignmentEvaluation</h1>
@@ -177,7 +173,7 @@ contributors: Sebastian Markbåge
       <h1>Runtime Semantics: RestDestructuringAssignmentEvaluation</h1>
       <p>With parameters _value_ and _excludedNames_.</p>
 
-      <emu-grammar>AssignmentRestProperty[Yield] : `...` DestructuringAssignmentTarget</emu-grammar>
+      <emu-grammar>AssignmentRestProperty[Yield, Await] : `...` DestructuringAssignmentTarget</emu-grammar>
       <emu-alg>
         1. If |DestructuringAssignmentTarget| is neither an |ObjectLiteral| nor an |ArrayLiteral|, then
           1. Let _lref_ be the result of evaluating |DestructuringAssignmentTarget|.
@@ -187,7 +183,7 @@ contributors: Sebastian Markbåge
         1. ReturnIfAbrupt(_assignStatus_).
         1. If |DestructuringAssignmentTarget| is neither an |ObjectLiteral| nor an |ArrayLiteral|, then
           1. Return PutValue(_lref_, _restObj_).
-        1. Let _nestedAssignmentPattern_ be the parse of the source text corresponding to |DestructuringAssignmentTarget| using either |AssignmentPattern| or |AssignmentPattern[Yield]| as the goal symbol depending upon whether this |AssignmentRestProperty| has the <sub>[Yield]</sub> parameter.
+        1. Let _nestedAssignmentPattern_ be the parse of the source text corresponding to |DestructuringAssignmentTarget| using either |AssignmentPattern[?Yield, ?Await]| as the goal symbol, adopting the parameter values from |AssignmentRestProperty|.
         1. Return the result of performing DestructuringAssignmentEvaluation of _nestedAssignmentPattern_ with _restObj_ as the argument.
       </emu-alg>
     </emu-clause>
