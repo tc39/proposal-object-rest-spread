@@ -125,6 +125,15 @@ contributors: Sebastian Markbåge
   </emu-clause>
 
   <ins class="block">
+    <emu-clause id="nested-rest-prohibition">
+      <h1>Static Semantics: Early Errors</h1>
+      <emu-grammar>
+        AssignmentRestProperty[Yield, Await] :
+          `...` DestructuringAssignmentTarget[Yield, Await]
+      </emu-grammar>
+      <ul><li>It is a Syntax Error if |DestructuringAssignmentTarget| is an |ArrayLiteral| or an |ObjectLiteral|.</li></ul>
+    </emu-clause>
+
     <emu-clause id="Rest-RuntimeSemantics-PropertyDestructuringAssignmentEvaluation">
       <h1>Runtime Semantics: PropertyDestructuringAssignmentEvaluation</h1>
       <p>With parameters _value_.</p>
@@ -174,16 +183,12 @@ contributors: Sebastian Markbåge
 
       <emu-grammar>AssignmentRestProperty[Yield, Await] : `...` DestructuringAssignmentTarget</emu-grammar>
       <emu-alg>
-        1. If |DestructuringAssignmentTarget| is neither an |ObjectLiteral| nor an |ArrayLiteral|, then
-          1. Let _lref_ be the result of evaluating |DestructuringAssignmentTarget|.
-          1. ReturnIfAbrupt(_lref_).
+        1. Let _lref_ be the result of evaluating |DestructuringAssignmentTarget|.
+        1. ReturnIfAbrupt(_lref_).
         1. Let _restObj_ be ObjectCreate(%ObjectPrototype%).
         1. Let _assignStatus_ be CopyDataProperties(_restObj_, _value_, _excludedNames_).
         1. ReturnIfAbrupt(_assignStatus_).
-        1. If |DestructuringAssignmentTarget| is neither an |ObjectLiteral| nor an |ArrayLiteral|, then
-          1. Return PutValue(_lref_, _restObj_).
-        1. Let _nestedAssignmentPattern_ be the parse of the source text corresponding to |DestructuringAssignmentTarget| using either |AssignmentPattern[?Yield, ?Await]| as the goal symbol, adopting the parameter values from |AssignmentRestProperty|.
-        1. Return the result of performing DestructuringAssignmentEvaluation of _nestedAssignmentPattern_ with _restObj_ as the argument.
+        1. Return PutValue(_lref_, _restObj_).
       </emu-alg>
     </emu-clause>
   </ins>
