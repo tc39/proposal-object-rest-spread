@@ -108,20 +108,6 @@ let { ...x, y, z } = obj; // syntax error
 let { x, ...y, ...z } = obj; // syntax error
 ```
 
-__Destructuring Only Own Properties__
-```javascript
-var o = Object.create({ x: 1, y: 2 });
-o.z = 3;
-
-var x, y, z;
-
-// Destructuring assignment allows nested objects
-({ x, ...{ y, z } } = o);
-x; // 1
-y; // undefined
-z; // 3
-```
-
 ### Prior Art ###
 
 __Successor-ML__
