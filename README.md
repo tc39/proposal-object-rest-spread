@@ -33,6 +33,8 @@ n; // { x: 1, y: 2, a: 3, b: 4 }
 
 [Babel](https://babeljs.io/docs/plugins/transform-object-rest-spread/)
 
+[Bublé](https://github.com/Rich-Harris/buble/)
+
 [JSTransform](https://github.com/facebook/jstransform)
 
 [TypeScript](https://github.com/Microsoft/TypeScript)
