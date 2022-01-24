@@ -1,7 +1,7 @@
 Object Spread Initializer
 -------------------------
 
-[Specification](Spec.md#spread-properties)
+[Specification](https://tc39.es/proposal-object-rest-spread/)
 
 ### Examples ###
 
